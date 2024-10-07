@@ -1,0 +1,88 @@
+.mapview {
+  height: calc(100vh - 8rem);
+  width: 80%;
+  background-color: #1d1b1b;
+  padding: 0.8rem 0.8rem 0.8rem 0.4rem;
+  position: relative;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 1.8rem;
+    left: 1.8rem;
+    z-index: 100;
+    height: 4rem;
+    width: 8rem;
+    font-family: inherit;
+    font-size: 1.6rem;
+    border-radius: 10rem;
+    border: 1px solid #5f5d5ded;
+
+    cursor: pointer;
+    color: var(--color-light--2);
+    background-color: #1d1b1bed;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #323030f3;
+    }
+  }
+
+  // ACTUAL MAP WRAPPER
+  div {
+    border-radius: 0.9rem;
+  }
+}
+
+// Disable the text when on form page
+:global([aria-label="Klavye kısayolları"]) {
+  display: none !important;
+}
+
+// GOOGLE MAPS CONTAINER
+.mapContainer {
+  width: 100%;
+  height: 100%;
+}
+
+// DARK AND LIGHT MODE
+.mode {
+  font-size: 3rem;
+  color: var(--color-brand--1);
+  animation: blurIn 0.3s ease-in-out;
+}
+
+// WHEN FORM IS OPEN (WAITING MAP STATE)
+.waiting {
+  // ACTUAL MAP WRAPPER
+  div {
+    cursor: not-allowed;
+    animation: breathe 3s infinite ease alternate-reverse 1s;
+  }
+
+  button {
+    opacity: 0.6;
+    cursor: not-allowed;
+
+    &:hover {
+      background-color: #1d1b1bed;
+    }
+  }
+}
+
+// ANIMATON
+@keyframes blurIn {
+  from {
+    filter: blur(3px);
+    opacity: 0.3;
+  }
+}
+
+@keyframes breathe {
+  from {
+    // opacity: 0.99;
+    filter: grayscale(100%) brightness(98%);
+  }
+}

@@ -1,0 +1,37 @@
+.spinnerContainer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: blurIn 0.2s ease-in-out;
+}
+
+@keyframes blurIn {
+  0% {
+    opacity: 0.2;
+    filter: blur(3px);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.spinner {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background: conic-gradient(#362d2d18 10%, #83cc16be);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: rotate 1.5s infinite linear;
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: rotate 1.5s infinite linear;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(1turn);
+  }
+}

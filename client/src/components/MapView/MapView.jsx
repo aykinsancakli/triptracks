@@ -1,0 +1,171 @@
+import React, { useCallback, useEffect, useRef, useState } from "react";
+
+import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+import { useMap } from "../../contexts/MapContext";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import styles from "./MapView.module.scss";
+import markerGreen from "../../assets/marker-green.png";
+import markerRed from "../../assets/marker-red.png";
+import pinRed from "../../assets/pin-red.png";
+
+import { CiDark, CiLight } from "react-icons/ci";
+import { usePlaces } from "../../contexts/PlacesContext";
+import { useUrlPosition } from "../../hooks/useUrlPosition";
+
+function MapView() {
+  // Map Provider
+  const {
+    coordinates,
+    initialPosition,
+    darkMapOption,
+    defaultMapOption,
+    dispatch,
+    isOpen,
+    isDarkMode,
+    selectedPlacePosition,
+  } = useMap();
+
+  // React Router
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const [lat, lng] = useUrlPosition();
+  const urlPosition = { lat: Number(lat), lng: Number(lng) };
+
+  console.log(urlPosition);
+
+  // Ref
+  const mapRef = useRef();
+  const onLoad = useCallback((map) => (mapRef.current = map), []);
+
+  const { places, isLoading } = usePlaces();
+  const [markers, setMarkers] = useState([]);
+
+  // Effect to update markers when places change
+  useEffect(() => {
+    if (places.length > 0) {
+      const updatedMarkers = places.map((place) => ({
+        id: place.id,
+        position: {
+          lat: Number(place.position.lat),
+          lng: Number(place.position.lng),
+        },
+      }));
+
+      // Update markers state
+      setMarkers(updatedMarkers);
+    } else {
+      // Reset markers if no places
+      setMarkers([]);
+    }
+  }, [places]);
+
+  const handleMapClick = (event) => {
+    const { lat, lng } = event.latLng.toJSON();
+    dispatch({ type: "map/clicked", payload: { lat, lng } });
+    navigate(`/app?lat=${lat}&lng=${lng}`);
+  };
+
+  // Effect to set the initial URL if lat and lng are not present
+  useEffect(() => {
+    const lat = urlPosition.lat;
+    const lng = urlPosition.lng;
+
+    // If no lat and lng in URL, change URL (?lat&lng) => (initial load)
+    if ((!lat || !lng) && places.length === 0) {
+      navigate(`/app?lat=${initialPosition.lat}&lng=${initialPosition.lng}`, {
+        replace: true,
+      });
+    }
+
+    if ((!lat || !lng) && places.length > 0) {
+      const latestPlace = places[places.length - 1];
+      const latestLat = Number(latestPlace.position.lat);
+      const latestLng = Number(latestPlace.position.lng);
+
+      navigate(`/app?lat=${latestLat}&lng=${latestLng}`, { replace: true });
+    }
+  }, [
+    initialPosition,
+    location,
+    navigate,
+    dispatch,
+    places,
+    urlPosition.lat,
+    urlPosition.lng,
+  ]);
+
+  // Effect to smoothly center the map using `panTo`
+  useEffect(() => {
+    if (mapRef.current && coordinates) {
+      mapRef.current.panTo(coordinates); // This smoothly pans the map
+    }
+  }, [coordinates]);
+
+  // Check if the current URL contains '/form'
+  const isFormPage = location.pathname.includes("/form");
+
+  return (
+    <div className={`${styles.mapview} ${isFormPage ? styles.waiting : ""}`}>
+      {/* DARK AND LIGHT MAP THEME */}
+      <button
+        onClick={() => dispatch({ type: "darkmode/change" })}
+        disabled={isFormPage} // Disable the button if on the /form page
+      >
+        {isDarkMode ? (
+          <CiDark className={styles.mode} />
+        ) : (
+          <CiLight className={styles.mode} />
+        )}
+      </button>
+
+      {/* GOOGLE MAP */}
+      <GoogleMap
+        mapContainerClassName={styles.mapContainer}
+        options={{
+          ...(isDarkMode ? darkMapOption : defaultMapOption),
+          draggable: !isFormPage, // Disable dragging if on the /form page
+        }}
+        zoom={isFormPage ? 11 : 10} // Zoom in when the /form page is open
+        center={
+          isFormPage
+            ? urlPosition || initialPosition // Use coordinates if on the form page
+            : places.length > 0
+            ? selectedPlacePosition || {
+                lat: Number(places[places.length - 1].position.lat), // Center on the latest place
+                lng: Number(places[places.length - 1].position.lng),
+              }
+            : urlPosition || coordinates || initialPosition // Fallback to initial position if no places exist
+        }
+        onLoad={onLoad}
+        onClick={isFormPage ? null : handleMapClick}
+      >
+        {markers.map((marker) => (
+          <Marker
+            key={marker.id}
+            position={marker.position}
+            icon={{
+              url: isDarkMode ? markerGreen : markerRed, // Use the imported marker image here
+              scaledSize: new window.google.maps.Size(32, 42.56), // Set the size if needed (width, height)
+            }}
+          />
+        ))}
+
+        {/* Conditionally render marker when on the /form page */}
+        {isFormPage && urlPosition.lat && urlPosition.lng && (
+          <Marker
+            position={urlPosition}
+            icon={{
+              url: pinRed,
+              scaledSize: new window.google.maps.Size(45, 57.825),
+            }}
+            clickable={!isFormPage}
+          />
+        )}
+      </GoogleMap>
+    </div>
+  );
+}
+
+export default React.memo(MapView);

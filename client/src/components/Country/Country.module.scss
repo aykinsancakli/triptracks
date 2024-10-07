@@ -1,0 +1,195 @@
+.country {
+  color: #fff;
+  border-bottom-left-radius: 0.9rem;
+  padding: 0.4rem 0.4rem 0.8rem 0.8rem;
+  position: relative;
+
+  height: 72%;
+}
+
+// COUNTRY WRAPPER
+.countryWrapper {
+  background: #333;
+  border-radius: 10px;
+  height: 100%;
+}
+
+// COUNTRY HEADER
+.countryHeader {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  // max-height: 160px;
+  max-height: 35%;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+
+  h2 {
+    position: absolute;
+    bottom: -0.6rem;
+    font-size: 1.8rem;
+    background: #333333d9;
+    border-radius: 0.8rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
+
+// COUNTRY BODY
+.countryBody {
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  position: relative;
+
+  height: 65%;
+  max-height: 65%;
+
+  h2 {
+    color: #fff;
+    font-size: 1.8rem;
+  }
+}
+
+// LIKE BUTTON
+.likeBtn {
+  background: 0 0;
+  border: none;
+  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(-32%, -40%);
+
+  &:hover .likePopup {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+}
+
+.liked {
+  animation: like-anim 0.7s steps(28) forwards;
+}
+
+// HEART BACKGROUND
+.heartBg {
+  cursor: pointer;
+  background: #585858a1;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  transition: all 0.2s;
+  display: flex;
+
+  &:hover {
+    background: #e47c8e5e;
+  }
+}
+
+// HEART ICON
+.heartIcon {
+  background-image: url(../../assets/heart.png);
+  background-position: 0;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+}
+
+// LIKE POPUP
+.likePopup {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  background: #4d4d4d;
+  border-radius: 5px;
+  width: 12.4rem;
+  padding: 1rem 2rem;
+  transition: all 0.2s;
+  position: relative;
+  bottom: 36px;
+  right: 31px;
+
+  &::after {
+    content: "";
+    border: 10px solid #0000;
+    border-top-color: #4d4d4d;
+    position: absolute;
+    bottom: -19.5px;
+    left: 65%;
+    transform: translate(-50%);
+  }
+
+  p {
+    color: #f3f3f3;
+    white-space: nowrap;
+    font-size: 13px;
+    margin-left: -1.2rem;
+  }
+
+  span {
+    animation: blurIn 0.6s ease;
+  }
+}
+
+// COUNTRY INFO ROW
+.countryInfoRow {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  width: fit-content;
+  font-size: 1.6rem;
+  display: flex;
+  position: relative;
+}
+
+// ICONS
+.globe,
+.home,
+.language,
+.population,
+.currency {
+  font-size: 2.4rem;
+  color: #acff2fab;
+}
+
+.bookmark {
+  color: #acff2fab;
+  font-size: 1.8rem;
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  animation: blurIn 0.8s ease;
+}
+
+// ANIMATIONS
+
+// POPUP ANIMATION
+@keyframes blurIn {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+// LIKE ANIMATION
+@keyframes like-anim {
+  to {
+    background-position: right;
+  }
+}

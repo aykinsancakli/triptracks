@@ -1,0 +1,143 @@
+.weather {
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0.8rem 0.4rem 0.4rem 0.8rem;
+  display: flex;
+  position: relative;
+
+  height: 28%;
+}
+
+// WEATHER BACKGROUND
+.weatherBackground {
+  // TEMP before fetch data
+  // background-image: url("https://www.villeinitalia.com/blog/wp-content/uploads/2017/06/0f96d229c75ff454cb1f141816485eb61.jpg");
+  background-size: cover;
+
+  color: #fff;
+  background-position: 50%;
+  background-size: cover;
+  border-radius: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 1.2rem;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 8px #0003;
+}
+
+.weatherBackground:before {
+  content: "";
+  z-index: 1;
+  background-color: #00000080;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.weatherBackground * {
+  z-index: 2;
+  position: relative;
+}
+
+// WEATHER HEADING
+.weatherHeading {
+  text-align: center;
+  font-size: 1.8rem;
+  width: 70%;
+  margin: 0 auto;
+
+  font-weight: 600;
+  padding: 0.2rem 0;
+  border-bottom: 1px solid #a1a5a1;
+}
+
+// WEATHER BODY
+.weatherBody {
+  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 1.2rem 0;
+  display: flex;
+}
+
+// WEATHER BODY MAIN
+.weatherBodyMain {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+
+  img {
+    background: #f2f2f266;
+    border: 1px solid #9aee9a;
+    border-radius: 100px;
+    height: 5.2rem;
+  }
+}
+
+// WEATHER INFO
+.weatherInfo {
+  flex-direction: column;
+  align-items: flex-start;
+  display: flex;
+
+  p {
+    font-size: 2rem;
+
+    .celcius {
+      font-size: 1.7rem;
+    }
+  }
+
+  span {
+    font-size: 1.2rem;
+    margin-top: -0.6rem;
+  }
+}
+
+// WEATHER FOOTER
+.weatherFooter {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+// WEATHER DATE
+.weatherDate {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+
+  span {
+    font-size: 1.6rem;
+  }
+}
+
+// WEATHER  TIME
+.weatherTime {
+  display: flex;
+  align-items: center;
+  gap: 0;
+
+  span {
+    font-size: 1.8rem;
+  }
+}
+
+.calendar,
+.clock {
+  font-size: 2.3rem;
+  color: #acff2fab;
+}
+
+.clock {
+  font-size: 2.8rem;
+}
