@@ -1,0 +1,170 @@
+.place {
+  color: #fff;
+  border-bottom-left-radius: 0.9rem;
+  padding: 0.4rem 0.4rem 0.8rem 0.8rem;
+  position: relative;
+
+  height: 72%;
+}
+
+// PLACE WRAPPER
+.placeWrapper {
+  background: #333;
+  border-radius: 10px;
+  height: 100%;
+
+  .formImg {
+    position: absolute;
+    z-index: 999;
+    right: -4.3px;
+    top: -98.7px;
+    transform: translateX(100%);
+    padding: 0.8rem;
+    background-color: rgba(179, 175, 177, 0.3098039216);
+    border-radius: 0.9rem;
+    height: auto;
+    width: 33rem;
+
+    animation: blurIn 1.5s ease;
+
+    img {
+      display: block;
+      max-width: 100%;
+      filter: brightness(0.85);
+    }
+
+    h2 {
+      color: var(--color-light--3);
+      text-transform: uppercase;
+      text-align: center;
+      z-index: 99999;
+      width: 100%;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1.95;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 102%) skewY(-6deg);
+
+      span {
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
+        background-image: linear-gradient(
+          to bottom right,
+          #aaf735c1,
+          #d2cbcbb0
+        );
+        padding: 1rem 2rem;
+      }
+    }
+  }
+}
+
+// ANIMATION
+@keyframes blurIn {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+// PLACE HEADER
+.placeHeader {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  justify-content: center;
+  align-items: center;
+
+  height: 20%;
+
+  display: flex;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    max-width: 100%;
+    object-position: 50% 100%;
+    height: auto;
+    display: block;
+  }
+
+  h2 {
+    position: absolute;
+    bottom: -0.6rem;
+    font-size: 1.8rem;
+    background: #333333d9;
+    border-radius: 0.8rem;
+    padding: 0.5rem 1rem;
+    text-align: center;
+  }
+}
+
+// PLACE BODY
+.placeBody {
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  position: relative;
+
+  height: 80%;
+
+  h2 {
+    color: #fff;
+    font-size: 1.8rem;
+  }
+}
+
+// PLACE INFO ROW
+.placeInfoRow {
+  justify-content: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  font-size: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  span {
+    font-size: 1.6rem;
+    padding-bottom: 0.1rem;
+    border-bottom: 1px solid #727272;
+    width: 100%;
+  }
+
+  a {
+    text-decoration: none;
+    color: #aaf735;
+    border-bottom: 1px solid transparent;
+    width: fit-content;
+    transition: all 0.2s;
+
+    &:hover {
+      border-bottom: 1px solid #aaf735;
+    }
+  }
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  text-transform: uppercase;
+  border-radius: 0.4rem;
+  cursor: pointer;
+
+  background-color: transparent;
+  border: 1px solid var(--color-light--3);
+  color: var(--color-light--3);
+}

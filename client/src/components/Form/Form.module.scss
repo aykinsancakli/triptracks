@@ -1,0 +1,166 @@
+.form {
+  color: #fff;
+  border-bottom-left-radius: 0.9rem;
+  padding: 0.4rem 0.4rem 0.8rem 0.8rem;
+  position: relative;
+
+  height: 72%;
+}
+
+.formImg {
+  position: absolute;
+  z-index: 999;
+  right: -4.3px;
+  top: -98.7px;
+  transform: translateX(100%);
+  padding: 0.8rem;
+  background-color: rgba(179, 175, 177, 0.3098039216);
+  border-radius: 0.9rem;
+  height: auto;
+  width: 33rem;
+
+  animation: blurIn 1.5s ease;
+
+  img {
+    display: block;
+    max-width: 100%;
+    filter: brightness(0.85);
+  }
+
+  h2 {
+    color: var(--color-light--3);
+    text-transform: uppercase;
+    text-align: center;
+    z-index: 99999;
+    width: 100%;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.95;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 102%) skewY(-6deg);
+
+    span {
+      -webkit-box-decoration-break: clone;
+      box-decoration-break: clone;
+      background-image: linear-gradient(to bottom right, #aaf735c1, #d2cbcbb0);
+      padding: 1rem 2rem;
+    }
+  }
+}
+
+// ANIMATION
+@keyframes blurIn {
+  from {
+    opacity: 0;
+    filter: blur(3px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+// COUNTRY WRAPPER
+.formWrapper {
+  background: #333;
+  border-radius: 10px;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+
+  padding: 2rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+
+  label {
+    font-size: 1.6rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid #727272;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.8rem 1.2rem;
+    font-family: inherit;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-light--3);
+    background-color: #1d1b1b;
+    color: var(--color-light--3);
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      background-color: #1d1b1bc0;
+    }
+  }
+
+  textarea {
+    background-color: #1d1b1b;
+    color: var(--color-light--3);
+    font-family: inherit;
+    font-size: 1.6rem;
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 9.2rem;
+    min-height: 9.2rem;
+    border-radius: 0.4rem;
+    transition: all 0.2s;
+
+    &:focus {
+      outline: none;
+      background-color: #1d1b1bc0;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    text-transform: uppercase;
+    border-radius: 0.4rem;
+    cursor: pointer;
+  }
+
+  .backBtn {
+    background-color: transparent;
+    border: 1px solid var(--color-light--3);
+    color: var(--color-light--3);
+  }
+
+  .addBtn {
+    border: none;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--color-brand--1);
+    color: var(--color-light--3);
+  }
+}
+
+.flag {
+  position: absolute;
+  right: 1rem;
+  top: 4.5rem;
+
+  img {
+    height: 2.4rem;
+  }
+}
