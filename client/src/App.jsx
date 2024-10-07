@@ -1,25 +1,35 @@
-import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { MapProvider } from "./contexts/MapContext";
+import { WeatherProvider } from "./contexts/WeatherContext";
+import { CountryProvider } from "./contexts/CountryContext";
+import { PlacesProvider } from "./contexts/PlacesContext";
+
+import Place from "./components/Place/Place";
+import Country from "./components/Country/Country";
+import Form from "./components/Form/Form";
+
+import AppLayout from "./pages/AppLayout/AppLayout";
 
 function App() {
-  const [places, setPlaces] = useState([]);
-
-  useEffect(() => {
-    const fetchAPI = async () => {
-      const res = await fetch("http://localhost:8080/api");
-      const data = await res.json();
-      const places = data.places;
-      setPlaces(places);
-    };
-    fetchAPI();
-  }, []);
-
   return (
-    <div>
-      <h1>PLACES</h1>
-      {places.map((place, index) => (
-        <div key={index}>{place}</div>
-      ))}
-    </div>
+    <BrowserRouter>
+      <PlacesProvider>
+        <MapProvider>
+          <WeatherProvider>
+            <CountryProvider>
+              <Routes>
+                <Route path="app" element={<AppLayout />}>
+                  <Route index element={<Country />} />
+                  <Route path="places/:id" element={<Place />} />
+                  <Route path="form" element={<Form />} />
+                </Route>
+              </Routes>
+            </CountryProvider>
+          </WeatherProvider>
+        </MapProvider>
+      </PlacesProvider>
+    </BrowserRouter>
   );
 }
 

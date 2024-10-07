@@ -1,0 +1,54 @@
+@import "https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap";
+
+/*
+SPACING SYSTEM (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 40 / 48 / 64 / 80 / 96 / 128
+
+FONT SIZE SYSTEM (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 /52 / 62 / 74 / 86 / 98
+*/
+
+// Global CSS variables, available in all CSS modules
+:root {
+  --color-brand--1: #84cc16;
+  --color-brand--2: #facc15;
+
+  --color-dark--0: #1d1b1b;
+  --color-dark--1: #343232;
+  --color-dark--2: #4a4949;
+  --color-light--1: #d1d5db;
+  --color-light--2: #e5e7eb;
+  --color-light--3: #f3f4f6;
+}
+
+// Media Query Manager
+@mixin respond($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Breakpoints
+$bp-largest: 75em; // 1200px
+$bp-large: 68.75em; // 1100px
+$bp-medium: 60.5em; // 968px
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  color: var(--color-light--2);
+  font-weight: 400;
+  line-height: 1.6;
+}
