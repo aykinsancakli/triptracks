@@ -6,6 +6,8 @@ import {
   useRef,
 } from "react";
 
+const BASE_URL = import.meta.env.VITE_BASE_URL; // Fetch the base URL from the .env file
+
 // ----- COUNTRY CONTEXT -----
 
 // Create Context
@@ -77,100 +79,48 @@ function CountryProvider({ children }) {
   // Store last fetched coordinates
   const lastFetchedCoords = useRef({ lat: null, lng: null });
 
-  // Get country info data
+  // Get country info data by name
   const getCountryDataByName = useCallback(async function getCountryDataByName(
     name
   ) {
     try {
-      const res = await fetch(`https://restcountries.com/v3.1/name/${name}`);
+      const res = await fetch(`${BASE_URL}/country/${name}`);
 
       if (!res.ok) throw new Error("Country not found");
 
-      const [data] = await res.json();
-
-      // Destructure data
-      const flag = data.flags.svg;
-      const countryName = data.name.common;
-      const [region] = data.continents;
-      const [capital] = data.capital;
-      const [language] = Object.values(data.languages);
-      const population = data.population.toString().slice(0, 2);
-      const currency = Object.values(data.currencies)[0].name;
-      const [capLat, capLng] = Object.values(data.capitalInfo.latlng);
-
-      // Create brand new object to return
-      const country = {
-        flag,
-        countryName,
-        region,
-        capital,
-        language,
-        population,
-        currency,
-        capLat,
-        capLng,
-      };
-
-      // Return the country object
-      return country;
+      const data = await res.json();
+      return data;
     } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: err.message,
-      });
+      dispatch({ type: "rejected", payload: err.message });
     }
   },
   []);
 
-  // Get country info (useCallback to prevent infitine re-render => (new reference))
-  const getCountry = useCallback(
-    async function getCountry(lat, lng) {
-      // Check if coordinates are the same as last fetched
-      if (
-        lastFetchedCoords.current.lat === lat &&
-        lastFetchedCoords.current.lng === lng
-      ) {
-        // console.log("Coordinates are the same. Skipping fetch.");
-        return; // Skip the fetch
-      }
+  // Get country info by coordinates (useCallback to prevent infitine re-render => (new reference))
+  const getCountry = useCallback(async function getCountry(lat, lng) {
+    if (
+      lastFetchedCoords.current.lat === lat &&
+      lastFetchedCoords.current.lng === lng
+    ) {
+      return; // Skip the fetch
+    }
 
-      dispatch({ type: "data/loading" });
-      try {
-        const res = await fetch(
-          `https://api-bdc.net/data/reverse-geocode?latitude=${lat}&longitude=${lng}&localityLanguage=en&key=${
-            import.meta.env.VITE_BIG_DATA_CLOUD_API_KEY
-          }`
-        );
+    dispatch({ type: "data/loading" });
 
-        if (!res.ok) throw new Error("Failed to reverse geocode location");
+    try {
+      const res = await fetch(`${BASE_URL}/country/${lat}/${lng}`);
 
-        // Fetch country name data
-        const countryNameData = await res.json();
-        dispatch({
-          type: "countryName/ready",
-          payload: countryNameData.countryName,
-        });
+      if (!res.ok) throw new Error("Failed to reverse geocode location");
 
-        // Fetch country info data
-        const countryData = await getCountryDataByName(
-          countryNameData.countryName || "spain"
-        );
+      const countryData = await res.json();
 
-        // IF COUNTRY NAME NOT EXISTS DO ANOTHER ACTION LIKE NOT EXISTS AND RETURN THE SAME STATE OR A MESSAGE LIKE THERE IS NO COUNTRY LIKE THAT ETC
+      dispatch({ type: "data/ready", payload: countryData });
 
-        dispatch({ type: "data/ready", payload: countryData });
-
-        // Update last fetched coordinates
-        lastFetchedCoords.current = { lat, lng };
-      } catch (err) {
-        dispatch({
-          type: "rejected",
-          payload: err.message,
-        });
-      }
-    },
-    [getCountryDataByName]
-  );
+      lastFetchedCoords.current = { lat, lng };
+    } catch (err) {
+      dispatch({ type: "rejected", payload: err.message });
+    }
+  }, []);
 
   return (
     <CountryContext.Provider
