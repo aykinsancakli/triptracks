@@ -47,7 +47,9 @@ function Country() {
   useEffect(() => {
     if (lat && lng) {
       const savedPlace = places.find(
-        (place) => place.position.lat === lat && place.position.lng === lng
+        (place) =>
+          place.position.lat === Number(lat) &&
+          place.position.lng === Number(lng)
       );
       setIsSaved(!!savedPlace); // Set isSaved to true if the place is found
     }
