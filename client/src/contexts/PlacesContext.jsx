@@ -6,7 +6,7 @@ import {
   useReducer,
 } from "react";
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://localhost:8080/api";
 
 const PlacesContext = createContext();
 
@@ -43,7 +43,7 @@ function reducer(state, action) {
       return {
         ...state,
         isLoading: false,
-        places: state.places.filter((place) => place.id !== action.payload),
+        places: state.places.filter((place) => place._id !== action.payload),
       };
 
     case "rejected":
@@ -52,6 +52,9 @@ function reducer(state, action) {
         isLoading: false,
         error: action.payload,
       };
+
+    default:
+      return state;
   }
 }
 
@@ -67,56 +70,80 @@ function PlacesProvider({ children }) {
 
       try {
         const res = await fetch(`${BASE_URL}/places`);
+
+        if (!res.ok) {
+          // Handle the case where the response status is not OK (e.g., 404 or 500)
+          const errorData = await res.json();
+          throw new Error(errorData.message || "Failed to fetch places.");
+        }
+
         const data = await res.json();
         dispatch({ type: "places/loaded", payload: data });
-      } catch {
+      } catch (error) {
+        // Send the actual error message back to the state
         dispatch({
           type: "rejected",
-          payload: "There was an error loading places...",
+          payload: error.message || "There was an error loading places...",
         });
       }
     }
+
     fetchPlaces();
   }, []);
 
   const getPlace = useCallback(
     async function getPlace(id) {
-      if (Number(id) === currentPlace.id) return;
+      // Check if the place is already loaded, comparing string ids
+      if (id === currentPlace._id) return;
 
       dispatch({ type: "loading" });
 
       try {
         const res = await fetch(`${BASE_URL}/places/${id}`);
+
+        // Handle HTTP errors
+        if (!res.ok) {
+          const errorData = await res.json();
+          throw new Error(errorData.message || "Failed to fetch place.");
+        }
+
         const data = await res.json();
         dispatch({ type: "place/loaded", payload: data });
-      } catch {
+      } catch (error) {
         dispatch({
           type: "rejected",
-          payload: "There was an error loading place",
+          payload: error.message || "There was an error loading place.",
         });
       }
     },
-    [currentPlace.id]
+    [currentPlace._id]
   );
 
   async function createPlace(newPlace) {
     dispatch({ type: "loading" });
 
     try {
-      const res = await fetch(`${BASE_URL}/places/`, {
+      const res = await fetch(`${BASE_URL}/places`, {
         method: "POST",
         body: JSON.stringify(newPlace),
         headers: {
           "Content-Type": "application/json",
         },
       });
-      const data = await res.json();
 
+      if (!res.ok) {
+        // Handle response errors
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to create place.");
+      }
+
+      const data = await res.json();
       dispatch({ type: "place/created", payload: data });
-    } catch {
+    } catch (error) {
+      // Send the actual error message back to the state
       dispatch({
         type: "rejected",
-        payload: "There was an error creating the place...",
+        payload: error.message || "There was an error creating the place...",
       });
     }
   }
@@ -125,19 +152,34 @@ function PlacesProvider({ children }) {
     dispatch({ type: "loading" });
 
     try {
-      const res = await fetch(`${BASE_URL}/places/${id}`, {
+      const response = await fetch(`${BASE_URL}/places/${id}`, {
         method: "DELETE",
       });
 
-      dispatch({
-        type: "place/deleted",
-        payload: id,
-      });
-    } catch {
-      dispatch({
-        type: "rejected",
-        payload: "There was an error deleting place...",
-      });
+      if (response.ok) {
+        // Success: Dispatch action to delete the place
+        dispatch({ type: "place/deleted", payload: id });
+      } else {
+        // Handle specific error responses
+        const errorData = await response.json();
+        let errorMessage = "Error deleting the place.";
+
+        // Customize message based on status code if needed
+        if (response.status === 404) {
+          errorMessage = "Place not found.";
+        } else if (response.status === 500) {
+          errorMessage = "Server error. Please try again later.";
+        }
+
+        dispatch({
+          type: "rejected",
+          payload: errorData.message || errorMessage,
+        });
+      }
+    } catch (err) {
+      // Log the error for debugging
+      console.error("Delete place error:", err);
+      dispatch({ type: "rejected", payload: "Error deleting the place." });
     }
   }
 

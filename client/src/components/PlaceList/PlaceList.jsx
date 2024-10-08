@@ -14,7 +14,7 @@ function PlaceList() {
       {!places.length && <Message message="No bookmarks yet." />}
 
       {places.map((place) => (
-        <PlaceItem place={place} key={place.id} />
+        <PlaceItem place={place} key={place._id} />
       ))}
     </ul>
   );

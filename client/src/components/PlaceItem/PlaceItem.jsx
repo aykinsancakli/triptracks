@@ -12,7 +12,7 @@ const formatDate = (date) =>
 
 function PlaceItem({ place }) {
   const { currentPlace, deletePlace } = usePlaces();
-  const { placeName, country, flag, date, id, position } = place;
+  const { placeName, country, flag, date, _id, position } = place;
 
   // Convert position to number
   const posNum = {
@@ -24,9 +24,9 @@ function PlaceItem({ place }) {
 
   const navigate = useNavigate();
 
-  function handleClick(e) {
+  async function handleClick(e) {
     e.preventDefault();
-    deletePlace(id);
+    await deletePlace(_id);
     navigate(`/app?lat=${posNum.lat}&lng=${posNum.lng}`);
   }
 
@@ -38,9 +38,9 @@ function PlaceItem({ place }) {
     <li>
       <Link
         className={`${styles.placeItem} ${
-          id === currentPlace.id ? styles["placeItem--active"] : ""
+          _id === currentPlace._id ? styles["placeItem--active"] : ""
         }`}
-        to={`places/${id}?lat=${position.lat}&lng=${position.lng}`}
+        to={`places/${_id}?lat=${position.lat}&lng=${position.lng}`}
         onClick={handleLinkClick}
       >
         <img className={styles.flag} src={flag} alt={`Flag of ${placeName}`} />

@@ -173,8 +173,6 @@ function WeatherProvider({ children }) {
       // Image selection
       const randomNum = Math.trunc(Math.random() * 7) + 1;
 
-      console.log(data.results);
-
       const weatherImageUrl = data.results[randomNum + 1].urls.regular;
 
       const formImageUrl = data.results[randomNum - 1].urls.regular;

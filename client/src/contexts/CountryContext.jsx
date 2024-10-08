@@ -88,8 +88,6 @@ function CountryProvider({ children }) {
 
       const [data] = await res.json();
 
-      console.log(data);
-
       // Destructure data
       const flag = data.flags.svg;
       const countryName = data.name.common;
@@ -132,7 +130,7 @@ function CountryProvider({ children }) {
         lastFetchedCoords.current.lat === lat &&
         lastFetchedCoords.current.lng === lng
       ) {
-        console.log("Coordinates are the same. Skipping fetch.");
+        // console.log("Coordinates are the same. Skipping fetch.");
         return; // Skip the fetch
       }
 
@@ -155,7 +153,7 @@ function CountryProvider({ children }) {
 
         // Fetch country info data
         const countryData = await getCountryDataByName(
-          countryNameData.countryName
+          countryNameData.countryName || "spain"
         );
 
         // IF COUNTRY NAME NOT EXISTS DO ANOTHER ACTION LIKE NOT EXISTS AND RETURN THE SAME STATE OR A MESSAGE LIKE THERE IS NO COUNTRY LIKE THAT ETC

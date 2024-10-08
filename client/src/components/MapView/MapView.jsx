@@ -33,8 +33,6 @@ function MapView() {
   const [lat, lng] = useUrlPosition();
   const urlPosition = { lat: Number(lat), lng: Number(lng) };
 
-  console.log(urlPosition);
-
   // Ref
   const mapRef = useRef();
   const onLoad = useCallback((map) => (mapRef.current = map), []);
