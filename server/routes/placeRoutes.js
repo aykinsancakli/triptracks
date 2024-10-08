@@ -1,56 +1,15 @@
 const express = require("express");
-const place = require("../models/Place");
-const Place = require("../models/Place");
+const placeController = require("./../controllers/placeController");
+
 const router = express.Router();
 
-// Get all places
-router.get("/", async (req, res) => {
-  try {
-    const places = await Place.find();
-    res.json(places);
-  } catch (err) {
-    res.status(500).json({ message: "Error fetching places", error: err });
-  }
-});
-
-// Get a specific place by ID
-router.get("/:id", async (req, res) => {
-  try {
-    const place = await Place.find(req.params.id);
-    if (!place) return res.status(404).json({ message: "Place not found" });
-    res.json(place);
-  } catch (err) {
-    res.status(500).json({ message: "Error fetching place", error: err });
-  }
-});
-
-// POST a new place
-router.post("/", async (req, res) => {
-  const { placeName, country, notes, date, userId, position } = req.body; // Added position to destructure
-
-  try {
-    const newPlace = await Place.create({
-      placeName,
-      country,
-      notes,
-      date,
-      userId,
-      position, // Include position in the creation of the new place
-    });
-    res.status(201).json(newPlace);
-  } catch (err) {
-    res.status(400).json({ message: "Error creating place", error: err });
-  }
-});
-
-// DELETE a place by ID
-router.delete("/:id", async (req, res) => {
-  try {
-    const place = await Place.findByIdAndDelete(req.params.id);
-    if (!place) return res.status(404).json({ message: "Place not found" });
-  } catch (err) {
-    res.status(500).json({ message: "Error deleting place", error: err });
-  }
-});
+router
+  .route("/")
+  .get(placeController.getAllPlaces)
+  .post(placeController.createPlace);
+router
+  .route("/:id")
+  .get(placeController.getPlace)
+  .delete(placeController.deletePlace);
 
 module.exports = router;

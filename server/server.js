@@ -1,14 +1,8 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const app = require("./app");
-const cors = require("cors");
 
 dotenv.config({ path: "./config.env" });
-
-const corsOptions = {
-  origin: ["http://localhost:5173"],
-};
-app.use(cors(corsOptions));
 
 // Connect to MongoDB
 const DB = process.env.DATABASE.replace(
