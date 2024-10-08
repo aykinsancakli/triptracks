@@ -22,9 +22,9 @@ function Form() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    console.log(date);
-
     if (!placeName && !date) return;
+
+    console.log(flag);
 
     const newPlace = {
       placeName,
@@ -33,6 +33,7 @@ function Form() {
       date: date.toISOString(),
       notes,
       position: { lat, lng },
+      userId: "64321f08b91d9c2e4cb6e023", // Add userId here for now
     };
 
     await createPlace(newPlace);
