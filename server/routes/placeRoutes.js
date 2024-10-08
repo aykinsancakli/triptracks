@@ -26,8 +26,7 @@ router.get("/:id", async (req, res) => {
 
 // POST a new place
 router.post("/", async (req, res) => {
-  const { placeName, country, notes, date, userId } = req.body;
-  console.log("Request Body:", req.body); // Log the request body
+  const { placeName, country, notes, date, userId, position } = req.body; // Added position to destructure
 
   try {
     const newPlace = await Place.create({
@@ -36,10 +35,10 @@ router.post("/", async (req, res) => {
       notes,
       date,
       userId,
+      position, // Include position in the creation of the new place
     });
     res.status(201).json(newPlace);
   } catch (err) {
-    console.error(err); // Log the error for better visibility
     res.status(400).json({ message: "Error creating place", error: err });
   }
 });

@@ -5,8 +5,12 @@ const placeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  country: String,
-  notes: String,
+  country: {
+    type: String,
+  },
+  notes: {
+    type: String,
+  },
   date: {
     type: Date,
     required: true,
@@ -15,6 +19,20 @@ const placeSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User", // Implement user auth later
     required: true,
+  },
+  flag: {
+    type: String,
+  },
+  position: {
+    // Keep latitude and longitude in a nested object
+    lat: {
+      type: Number,
+      required: true,
+    },
+    lng: {
+      type: Number,
+      required: true,
+    },
   },
 });
 

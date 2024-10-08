@@ -20,11 +20,6 @@ mongoose
   .then(() => console.log("DB Connection successful!"))
   .catch((err) => console.error("DB connection error:", err));
 
-// API Endpoint
-app.get("/api", (req, res) => {
-  res.json({ places: ["trevi", "madrid", "rome"] });
-});
-
 // Start the server
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
