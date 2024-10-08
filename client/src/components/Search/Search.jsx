@@ -39,7 +39,7 @@ function Search() {
   return (
     <nav className={styles.nav}>
       {/* LOGO */}
-      <h1 className={styles.logo}>GeoSnap</h1>
+      <h1 className={styles.logo}>TripTracks</h1>
 
       {/* AUTOCOMPLETE */}
       <PlacesAutocomplete

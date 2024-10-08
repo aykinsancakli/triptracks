@@ -22,13 +22,15 @@ function Form() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    console.log(date);
+
     if (!placeName && !date) return;
 
     const newPlace = {
       placeName,
       country,
       flag,
-      date,
+      date: date.toISOString(),
       notes,
       position: { lat, lng },
     };

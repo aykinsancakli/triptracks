@@ -104,8 +104,8 @@ function WeatherProvider({ children }) {
       dispatch({ type: "time/loaded", payload: timeData });
 
       // Fetch image data
-      // const imageData = await getImage(weatherData.name, timeData.city); // weatherData.name = (city name)
-      // dispatch({ type: "image/loaded", payload: imageData });
+      const imageData = await getImage(weatherData.name, timeData.city); // weatherData.name = (city name)
+      dispatch({ type: "image/loaded", payload: imageData });
 
       // All ready
       dispatch({ type: "data/ready" });
