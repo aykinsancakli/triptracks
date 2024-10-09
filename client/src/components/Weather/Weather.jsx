@@ -8,6 +8,7 @@ import { WiTime10 } from "react-icons/wi";
 
 import { useUrlPosition } from "../../hooks/useUrlPosition";
 import { useWeather } from "../../contexts/WeatherContext";
+import Message from "../Message/Message";
 
 function Weather() {
   const {
@@ -20,6 +21,7 @@ function Weather() {
     time,
     imgUrl,
     getWeather,
+    error,
   } = useWeather();
 
   // URL change on map click triggers re-render
@@ -34,6 +36,10 @@ function Weather() {
     <div className={styles.weather}>
       {isLoading ? (
         <Spinner />
+      ) : error ? (
+        <div className={styles.error}>
+          <Message message={error} />
+        </div>
       ) : (
         <div
           className={styles.weatherBackground}

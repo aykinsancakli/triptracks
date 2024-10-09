@@ -56,7 +56,7 @@ function reducer(state, action) {
 
     // All data loaded state
     case "data/ready":
-      return { ...state, isLoading: false };
+      return { ...state, isLoading: false, error: "" };
 
     // Error state
     case "rejected":
@@ -81,6 +81,7 @@ function WeatherProvider({ children }) {
       time,
       imgUrl,
       formImgUrl,
+      error,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -97,7 +98,10 @@ function WeatherProvider({ children }) {
         `${BASE_URL}/weather/by-coordinates?lat=${lat}&lng=${lng}`
       );
 
-      if (!weatherRes.ok) throw new Error("Failed to fetch weather data");
+      if (weatherRes.status === 404) {
+        const weatherResBody = await weatherRes.json();
+        throw new Error(weatherResBody.message);
+      }
 
       const weatherData = await weatherRes.json();
       dispatch({ type: "weather/loaded", payload: weatherData });
@@ -159,6 +163,7 @@ function WeatherProvider({ children }) {
         imgUrl,
         getWeather,
         formImgUrl,
+        error,
       }}
     >
       {children}

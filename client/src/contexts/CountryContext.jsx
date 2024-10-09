@@ -49,6 +49,7 @@ function reducer(state, action) {
         language: action.payload.language,
         population: action.payload.population,
         currency: action.payload.currency,
+        error: "",
       };
 
     // Error state
@@ -77,8 +78,6 @@ function CountryProvider({ children }) {
     },
     dispatch,
   ] = useReducer(reducer, initialState);
-
-  console.log(error);
 
   // Store last fetched coordinates
   const lastFetchedCoords = useRef({ lat: null, lng: null });
