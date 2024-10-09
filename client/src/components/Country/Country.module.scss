@@ -177,6 +177,7 @@
   animation: blurIn 0.8s ease;
 }
 
+// ERROR
 .error {
   border-radius: 0.9rem;
   padding: 0.8rem;
@@ -187,6 +188,18 @@
   justify-content: center;
   font-size: 1.6rem;
   animation: blurIn 0.8s ease;
+}
+
+// VISITED LABEL
+.visitedLabel {
+  box-shadow: 0 0 1rem rgb(10, 189, 10);
+  padding: 0.5rem;
+  background-color: #a3e635;
+  color: #333;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.3rem;
 }
 
 // ANIMATIONS

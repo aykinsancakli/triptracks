@@ -24,7 +24,7 @@ const formatDate = (date) => {
     ? "Invalid date"
     : new Intl.DateTimeFormat("en", {
         day: "numeric",
-        month: "long",
+        month: "short",
         year: "numeric",
       }).format(parsedDate);
 };
@@ -47,7 +47,7 @@ function Country() {
   const { places } = usePlaces();
 
   const [isSaved, setIsSaved] = useState(false);
-  const [savedPlace, setSavedPlace] = useState({});
+  const [savedPlace, setSavedPlace] = useState(null);
 
   // URL change on map click triggers re-render
   const [lat, lng] = useUrlPosition();
@@ -104,13 +104,11 @@ function Country() {
             {/* COUNTRY BODY */}
             <div className={styles.countryBody}>
               {/* VISITED LABEL FOR COUNTRY BODY */}
-              <div
-                className={
-                  isSaved ? `${styles.visitedLabel}` : `${styles.hiddenLabel}`
-                }
-              >
-                Visited on {formatDate(savedPlace.date)}
-              </div>
+              {savedPlace && isSaved && (
+                <div className={styles.visitedLabel}>
+                  Visited on {formatDate(savedPlace.date)}
+                </div>
+              )}
 
               {/* BOOKMARKS BUTTON */}
               <button
