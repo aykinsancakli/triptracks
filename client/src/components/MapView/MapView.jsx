@@ -40,6 +40,28 @@ function MapView() {
   const { places, isLoading } = usePlaces();
   const [markers, setMarkers] = useState([]);
 
+  const [selectedMarker, setSelectedMarker] = useState(null);
+  const [infoWindowVisible, setInfoWindowVisible] = useState(false);
+
+  // Modify the handleMarkerClick function to set selected marker and its corresponding place details
+  const handleMarkerClick = (marker) => {
+    const place = places.find(
+      (place) =>
+        place.position.lat === marker.position.lat &&
+        place.position.lng === marker.position.lng
+    );
+
+    if (place) {
+      setSelectedMarker({
+        ...marker,
+        flag: place.flag,
+        place: place.placeName,
+      });
+    }
+
+    setInfoWindowVisible(true);
+  };
+
   // Effect to update markers when places change
   useEffect(() => {
     if (places.length > 0) {
@@ -60,6 +82,8 @@ function MapView() {
   }, [places]);
 
   const handleMapClick = (event) => {
+    setInfoWindowVisible(false);
+
     const { lat, lng } = event.latLng.toJSON();
     dispatch({ type: "map/clicked", payload: { lat, lng } });
     navigate(`/app?lat=${lat}&lng=${lng}`);
@@ -93,6 +117,8 @@ function MapView() {
     urlPosition.lat,
     urlPosition.lng,
   ]);
+
+  console.log(places[0]);
 
   // Effect to smoothly center the map using `panTo`
   useEffect(() => {
@@ -144,11 +170,35 @@ function MapView() {
             key={marker.id}
             position={marker.position}
             icon={{
-              url: isDarkMode ? markerGreen : markerRed, // Use the imported marker image here
-              scaledSize: new window.google.maps.Size(32, 42.56), // Set the size if needed (width, height)
+              url: isDarkMode ? markerGreen : markerRed,
+              scaledSize: new window.google.maps.Size(32, 42.56),
             }}
+            onClick={() => handleMarkerClick(marker)} // Trigger InfoWindow on marker click
           />
         ))}
+
+        {infoWindowVisible && selectedMarker && (
+          <InfoWindow
+            position={selectedMarker.position}
+            onCloseClick={() => setInfoWindowVisible(false)}
+            options={{
+              pixelOffset: new window.google.maps.Size(0, -30), // Adjust this value as needed
+            }}
+          >
+            <div className={styles.infoWindow}>
+              <h2>
+                {selectedMarker.place.length > 10
+                  ? `${selectedMarker.place.slice(0, 10)}...` // Truncate and add "..."
+                  : selectedMarker.place}
+              </h2>
+              <img
+                src={selectedMarker.flag}
+                alt={`${selectedMarker.country} flag`}
+                style={{ width: "30px", height: "20px" }}
+              />
+            </div>
+          </InfoWindow>
+        )}
 
         {/* Conditionally render marker when on the /form page */}
         {isFormPage && urlPosition.lat && urlPosition.lng && (

@@ -72,6 +72,75 @@
   }
 }
 
+.infoWindow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 3rem !important;
+  gap: 0.3rem !important;
+
+  h2 {
+    font-weight: 400;
+    font-size: 1.8rem;
+  }
+}
+
+:global {
+  /* Customize the InfoWindow container */
+  .gm-style-iw {
+    background-color: rgba(117, 160, 38, 0.603) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+    width: auto !important;
+    min-width: 12rem !important;
+    height: 6rem !important;
+  }
+
+  .gm-style-iw-c {
+    padding: 0 !important;
+  }
+
+  /* Customize the close button */
+  .gm-style-iw-chr {
+    color: rgb(21, 21, 21);
+    font-size: 10px !important;
+    height: 2rem !important;
+    position: absolute !important;
+    top: -40% !important;
+    right: 10% !important;
+  }
+
+  /* Customize the content area */
+  .gm-style-iw-d {
+    background-color: rgba(40, 171, 17, 0.279) !important;
+    padding: 10px !important;
+    text-align: center !important;
+    overflow: hidden !important;
+    height: 100% !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Customize the close button (aria-label="Kapat") */
+  .gm-style-iw-close-btn {
+    background-color: transparent !important;
+    color: rgb(255, 255, 255) !important;
+    font-size: 18px !important;
+    border: none !important;
+    cursor: pointer !important;
+    position: absolute !important;
+    top: 0 !important;
+  }
+
+  /* Optional: Hover effect for close button */
+  .gm-style-iw-close-btn:hover {
+    color: darkred !important;
+    transform: scale(1.1) !important;
+  }
+}
+
 // ANIMATON
 @keyframes blurIn {
   from {
