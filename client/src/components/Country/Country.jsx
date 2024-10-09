@@ -13,9 +13,21 @@ import { GoPerson } from "react-icons/go";
 import { MdCurrencyExchange } from "react-icons/md";
 import { useCountry } from "../../contexts/CountryContext";
 import Spinner from "../Spinner/Spinner";
+import Message from "../Message/Message";
 import { useNavigate } from "react-router-dom";
 import { useWeather } from "../../contexts/WeatherContext";
 import { usePlaces } from "../../contexts/PlacesContext";
+
+const formatDate = (date) => {
+  const parsedDate = new Date(date);
+  return isNaN(parsedDate)
+    ? "Invalid date"
+    : new Intl.DateTimeFormat("en", {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(parsedDate);
+};
 
 function Country() {
   const {
@@ -28,12 +40,14 @@ function Country() {
     population,
     currency,
     getCountry,
+    error,
   } = useCountry();
   const { placeName } = useWeather();
 
   const { places } = usePlaces();
 
   const [isSaved, setIsSaved] = useState(false);
+  const [savedPlace, setSavedPlace] = useState({});
 
   // URL change on map click triggers re-render
   const [lat, lng] = useUrlPosition();
@@ -52,6 +66,7 @@ function Country() {
           place.position.lng === Number(lng)
       );
       setIsSaved(!!savedPlace); // Set isSaved to true if the place is found
+      setSavedPlace(savedPlace);
     }
   }, [lat, lng, places]);
 
@@ -69,6 +84,10 @@ function Country() {
       <div className={styles.countryWrapper}>
         {isLoading ? (
           <Spinner />
+        ) : error ? (
+          <div className={styles.error}>
+            <Message message={error} />
+          </div>
         ) : (
           <>
             {/* COUNTRY HEADER */}
@@ -84,6 +103,15 @@ function Country() {
 
             {/* COUNTRY BODY */}
             <div className={styles.countryBody}>
+              {/* VISITED LABEL FOR COUNTRY BODY */}
+              <div
+                className={
+                  isSaved ? `${styles.visitedLabel}` : `${styles.hiddenLabel}`
+                }
+              >
+                Visited on {formatDate(savedPlace.date)}
+              </div>
+
               {/* BOOKMARKS BUTTON */}
               <button
                 className={styles.likeBtn}

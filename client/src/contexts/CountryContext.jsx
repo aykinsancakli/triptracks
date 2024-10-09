@@ -23,6 +23,7 @@ const initialState = {
   language: null,
   population: null,
   currency: null,
+  error: "",
 };
 
 // Reducer function
@@ -72,9 +73,12 @@ function CountryProvider({ children }) {
       language,
       population,
       currency,
+      error,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
+
+  console.log(error);
 
   // Store last fetched coordinates
   const lastFetchedCoords = useRef({ lat: null, lng: null });
@@ -93,7 +97,10 @@ function CountryProvider({ children }) {
     try {
       const countryRes = await fetch(`${BASE_URL}/country/${lat}/${lng}`);
 
-      if (!countryRes.ok) throw new Error("Failed to reverse geocode location");
+      if (countryRes.status === 404) {
+        const countryResBody = await countryRes.json();
+        throw new Error(countryResBody.message);
+      }
 
       const countryData = await countryRes.json();
 
@@ -117,6 +124,7 @@ function CountryProvider({ children }) {
         population,
         currency,
         getCountry,
+        error,
 
         dispatch,
       }}

@@ -118,8 +118,6 @@ function MapView() {
     urlPosition.lng,
   ]);
 
-  console.log(places[0]);
-
   // Effect to smoothly center the map using `panTo`
   useEffect(() => {
     if (mapRef.current && coordinates) {
@@ -182,13 +180,13 @@ function MapView() {
             position={selectedMarker.position}
             onCloseClick={() => setInfoWindowVisible(false)}
             options={{
-              pixelOffset: new window.google.maps.Size(0, -30), // Adjust this value as needed
+              pixelOffset: new window.google.maps.Size(0, -30),
             }}
           >
             <div className={styles.infoWindow}>
               <h2>
                 {selectedMarker.place.length > 10
-                  ? `${selectedMarker.place.slice(0, 10)}...` // Truncate and add "..."
+                  ? `${selectedMarker.place.slice(0, 10)}...`
                   : selectedMarker.place}
               </h2>
               <img
