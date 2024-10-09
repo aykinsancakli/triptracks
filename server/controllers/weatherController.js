@@ -14,9 +14,14 @@ exports.getWeatherByCoordinates = async (req, res) => {
     }
 
     const weatherData = await weatherRes.json();
+
+    if (weatherData.name === "") {
+      throw new Error("🔍 Not a valid place. Click elsewhere!");
+    }
+
     res.status(200).json(weatherData);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 

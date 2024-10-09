@@ -17,7 +17,7 @@ exports.getCountryByCoordinates = async (req, res) => {
 
     if (countryNameData.countryName === "" || countryNameData.city === "") {
       throw new Error(
-        "👋 That doesn't seem to be a city. Click somewhere else 😉"
+        "🏙️ That doesn't seem like a city. Please try another location!"
       );
     }
 
