@@ -5,10 +5,6 @@ const Place = require("../models/Place");
 exports.getAllPlaces = async (req, res) => {
   try {
     const places = await Place.find();
-    // Check if places array is empty
-    if (places.length === 0) {
-      return res.status(404).json({ message: "No places found." });
-    }
     res.json(places);
   } catch (err) {
     console.error("Error fetching places:", err); // Log the error for debugging
