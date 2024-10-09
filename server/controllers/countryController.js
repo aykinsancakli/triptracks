@@ -14,6 +14,13 @@ exports.getCountryByCoordinates = async (req, res) => {
     }
 
     const countryNameData = await bdcRes.json();
+
+    if (countryNameData.countryName === "" || countryNameData.city === "") {
+      throw new Error(
+        "👋 That doesn't seem to be a city. Click somewhere else 😉"
+      );
+    }
+
     const countryName = countryNameData.countryName;
 
     // Fetch country data by country name
@@ -28,7 +35,7 @@ exports.getCountryByCoordinates = async (req, res) => {
     const countryData = await countryDataRes.json();
     res.status(200).json(countryData);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
