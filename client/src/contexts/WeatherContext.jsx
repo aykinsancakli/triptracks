@@ -2,6 +2,8 @@ import { createContext, useCallback, useContext, useReducer } from "react";
 
 // ----- WEATHER CONTEXT -----
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 // Create context
 const WeatherContext = createContext();
 
@@ -40,8 +42,8 @@ function reducer(state, action) {
     case "time/loaded":
       return {
         ...state,
-        date: action.payload?.date,
-        time: action.payload?.time,
+        date: action.payload.date,
+        time: action.payload.time,
       };
 
     // Image data loaded state
@@ -84,107 +86,65 @@ function WeatherProvider({ children }) {
   ] = useReducer(reducer, initialState);
 
   // Get weather info (useCallback to prevent infitine re-render => (new reference))
-  const getWeather = useCallback(async function getWeather(lat, lng) {
+  const getWeather = useCallback(async (lat, lng) => {
+    if (!lat || !lng) return;
+
     dispatch({ type: "data/loading" });
+
     try {
-      const res = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${
-          import.meta.env.VITE_OPEN_WEATHER_MAP_API_KEY
-        }&units=metric`
+      // Fetch weather data from server
+      const weatherRes = await fetch(
+        `${BASE_URL}/weather/by-coordinates?lat=${lat}&lng=${lng}`
       );
 
-      if (!res.ok) throw new Error("Weather data not available");
+      if (!weatherRes.ok) throw new Error("Failed to fetch weather data");
 
-      // Fetch weather data
-      const weatherData = await res.json();
+      const weatherData = await weatherRes.json();
       dispatch({ type: "weather/loaded", payload: weatherData });
 
-      // Fetch time data
-      const timeData = await getTime(lat, lng);
-      dispatch({ type: "time/loaded", payload: timeData });
-
-      // Fetch image data
-      const imageData = await getImage(weatherData.name, timeData.city); // weatherData.name = (city name)
-      dispatch({ type: "image/loaded", payload: imageData });
-
-      // All ready
-      dispatch({ type: "data/ready" });
-    } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: err.message,
-      });
-    }
-  }, []);
-
-  // Get time info
-  async function getTime(lat, lng) {
-    try {
-      const res = await fetch(
-        `https://api.api-ninjas.com/v1/worldtime?lat=${lat}&lon=${lng}`,
-        {
-          headers: {
-            "X-Api-Key": import.meta.env.VITE_API_NINJAS_API_KEY,
-          },
-        }
+      // Fetch time data from server
+      const timeRes = await fetch(
+        `${BASE_URL}/weather/time/by-coordinates?lat=${lat}&lng=${lng}`
       );
 
-      if (!res.ok) throw new Error("Time data not available");
+      if (!timeRes.ok) throw new Error("Failed to fetch time data");
 
-      const data = await res.json();
+      const timeData = await timeRes.json();
 
       // City e.g Rome
-      const city = data.timezone.split("/")[1];
+      const city = timeData.timezone.split("/")[1];
 
       // Find corresponding data
-      const dateRes = data.date.replaceAll("-", ".");
-      const timeRes = data.datetime;
+      const dateVal = timeData.date.replaceAll("-", ".");
+      const timeVal = timeData.datetime;
 
       // Internationalize the date format based on the user's locale
       const userLocale = navigator.language;
 
       const date = new Intl.DateTimeFormat(userLocale, {
         dateStyle: "medium",
-      }).format(new Date(dateRes));
+      }).format(new Date(dateVal));
 
-      const time = timeRes.split(" ")[1].slice(0, 5);
+      const time = timeVal.split(" ")[1].slice(0, 5);
 
-      return { date, time, city };
-    } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: err.message,
-      });
-    }
-  }
+      dispatch({ type: "time/loaded", payload: { time, date } });
 
-  // Get image from unsplash
-  async function getImage(place, city) {
-    try {
-      const res = await fetch(
-        `https://api.unsplash.com/search/photos?client_id=${
-          import.meta.env.VITE_UNSPLASH_API_KEY
-        }&query=${`${city}, ${place}`}`
+      // Fetch image data from server
+      const imageRes = await fetch(
+        `${BASE_URL}/weather/image?place=${weatherData.name}&city=${city}` // We get city from time data above
       );
 
-      if (!res.json) throw new Error("City image not available");
-      const data = await res.json();
+      if (!imageRes.ok) throw new Error("Failed to fetch image data");
 
-      // Image selection
-      const randomNum = Math.trunc(Math.random() * 7) + 1;
+      const imageData = await imageRes.json();
+      dispatch({ type: "image/loaded", payload: imageData });
 
-      const weatherImageUrl = data.results[randomNum + 1].urls.regular;
-
-      const formImageUrl = data.results[randomNum - 1].urls.regular;
-
-      return { weatherImageUrl, formImageUrl };
+      // Mark all data as ready
+      dispatch({ type: "data/ready" });
     } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: err.message,
-      });
+      dispatch({ type: "rejected", payload: err.message });
     }
-  }
+  }, []);
 
   return (
     <WeatherContext.Provider

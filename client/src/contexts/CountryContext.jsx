@@ -79,23 +79,6 @@ function CountryProvider({ children }) {
   // Store last fetched coordinates
   const lastFetchedCoords = useRef({ lat: null, lng: null });
 
-  // Get country info data by name
-  const getCountryDataByName = useCallback(async function getCountryDataByName(
-    name
-  ) {
-    try {
-      const res = await fetch(`${BASE_URL}/country/${name}`);
-
-      if (!res.ok) throw new Error("Country not found");
-
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      dispatch({ type: "rejected", payload: err.message });
-    }
-  },
-  []);
-
   // Get country info by coordinates (useCallback to prevent infitine re-render => (new reference))
   const getCountry = useCallback(async function getCountry(lat, lng) {
     if (
@@ -108,11 +91,11 @@ function CountryProvider({ children }) {
     dispatch({ type: "data/loading" });
 
     try {
-      const res = await fetch(`${BASE_URL}/country/${lat}/${lng}`);
+      const countryRes = await fetch(`${BASE_URL}/country/${lat}/${lng}`);
 
-      if (!res.ok) throw new Error("Failed to reverse geocode location");
+      if (!countryRes.ok) throw new Error("Failed to reverse geocode location");
 
-      const countryData = await res.json();
+      const countryData = await countryRes.json();
 
       dispatch({ type: "data/ready", payload: countryData });
 
