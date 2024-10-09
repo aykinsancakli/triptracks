@@ -14,6 +14,9 @@ function PlaceItem({ place }) {
   const { currentPlace, deletePlace } = usePlaces();
   const { placeName, country, flag, date, _id, position } = place;
 
+  // Check if the current URL contains '/form'
+  const isFormPage = location.pathname.includes("/form");
+
   // Convert position to number
   const posNum = {
     lat: Number(position.lat),
@@ -39,7 +42,7 @@ function PlaceItem({ place }) {
       <Link
         className={`${styles.placeItem} ${
           _id === currentPlace._id ? styles["placeItem--active"] : ""
-        }`}
+        } ${isFormPage ? styles.disabledLink : ""}`}
         to={`places/${_id}?lat=${position.lat}&lng=${position.lng}`}
         onClick={handleLinkClick}
       >

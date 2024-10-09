@@ -37,7 +37,6 @@
 }
 
 .deleteBtn {
-  // height: 3rem;
   align-self: stretch;
   width: 3rem;
   border-radius: 0.4rem;
@@ -59,4 +58,9 @@
   &:hover {
     background-color: rgba(255, 0, 0, 0.528);
   }
+}
+
+.disabledLink {
+  cursor: not-allowed;
+  pointer-events: none;
 }
