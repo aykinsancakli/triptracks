@@ -37,7 +37,8 @@ exports.getPlace = async (req, res) => {
 
 // POST a new place
 exports.createPlace = async (req, res) => {
-  const { placeName, country, notes, date, userId, flag, position } = req.body;
+  const { placeName, country, notes, rating, date, userId, flag, position } =
+    req.body;
 
   try {
     // Validate incoming data (you can add more validation as needed)
@@ -51,6 +52,7 @@ exports.createPlace = async (req, res) => {
       placeName,
       country,
       notes,
+      rating,
       date,
       userId,
       flag,

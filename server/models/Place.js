@@ -11,6 +11,9 @@ const placeSchema = new mongoose.Schema({
   notes: {
     type: String,
   },
+  rating: {
+    type: String,
+  },
   date: {
     type: Date,
     required: true,
