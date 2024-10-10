@@ -8,7 +8,7 @@ import PlacesAutocomplete, {
 import { MdBookmarkAdded } from "react-icons/md";
 import { FaSearchLocation } from "react-icons/fa";
 import { useMap } from "../../contexts/MapContext";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { usePlaces } from "../../contexts/PlacesContext";
 import PlaceList from "../PlaceList/PlaceList";
 
@@ -33,7 +33,8 @@ function Search() {
     navigate(`/app?lat=${ll.lat}&lng=${ll.lng}`);
   };
 
-  // Check if the current URL contains '/form'
+  // Use location from React Router to check if the current URL contains '/form'
+  const location = useLocation();
   const isFormPage = location.pathname.includes("/form");
 
   return (

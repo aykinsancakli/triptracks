@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./PlaceItem.module.scss";
 import { usePlaces } from "../../contexts/PlacesContext";
 import { useMap } from "../../contexts/MapContext";
@@ -14,7 +14,8 @@ function PlaceItem({ place }) {
   const { currentPlace, deletePlace } = usePlaces();
   const { placeName, country, flag, date, _id, position } = place;
 
-  // Check if the current URL contains '/form'
+  // Use location from React Router to check if the current URL contains '/form'
+  const location = useLocation();
   const isFormPage = location.pathname.includes("/form");
 
   // Convert position to number

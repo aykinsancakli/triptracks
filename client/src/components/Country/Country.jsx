@@ -18,16 +18,12 @@ import { useNavigate } from "react-router-dom";
 import { useWeather } from "../../contexts/WeatherContext";
 import { usePlaces } from "../../contexts/PlacesContext";
 
-const formatDate = (date) => {
-  const parsedDate = new Date(date);
-  return isNaN(parsedDate)
-    ? "Invalid date"
-    : new Intl.DateTimeFormat("en", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-      }).format(parsedDate);
-};
+const formatDate = (date) =>
+  new Intl.DateTimeFormat("en", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(new Date(date));
 
 function Country() {
   const {

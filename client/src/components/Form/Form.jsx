@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useUrlPosition } from "../../hooks/useUrlPosition";
 import styles from "./Form.module.scss";
 import { useState } from "react";
@@ -7,10 +7,15 @@ import { useWeather } from "../../contexts/WeatherContext";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { usePlaces } from "../../contexts/PlacesContext";
+import StarRating from "../StarRating/StarRating";
+
+const messages = ["Terrible", "Bad", "Normal", "Good", "Amazing"];
 
 function Form() {
   const [date, setDate] = useState(new Date());
   const [notes, setNotes] = useState("");
+  const [userRating, setUserRating] = useState(null);
+  const rating = messages[userRating - 1];
 
   const [lat, lng] = useUrlPosition();
 
@@ -32,6 +37,7 @@ function Form() {
       flag,
       date: date.toISOString(),
       notes,
+      rating,
       position: { lat, lng },
       userId: "64321f08b91d9c2e4cb6e023", // Add userId here for now
     };
@@ -40,8 +46,15 @@ function Form() {
     navigate(-1);
   }
 
+  // Use location from React Router to check if the current URL contains '/form'
+  const location = useLocation();
+  const isFormPage = location.pathname.includes("/form");
+
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form
+      className={`${styles.form} ${isFormPage ? styles.fullLength : ""}`}
+      onSubmit={handleSubmit}
+    >
       <div className={styles.formWrapper}>
         <div className={styles.formImg}>
           <h2>
@@ -66,6 +79,18 @@ function Form() {
             onChange={(date) => setDate(date)}
             selected={date}
             dateFormat="dd/MM/yyyy"
+          />
+        </div>
+
+        <div className={styles.row}>
+          <label htmlFor="rating">How was your trip?</label>
+
+          <StarRating
+            maxRating={5}
+            size={28}
+            color="#84cc16"
+            messages={messages}
+            onSetRating={setUserRating}
           />
         </div>
 

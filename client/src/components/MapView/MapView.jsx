@@ -28,7 +28,10 @@ function MapView() {
 
   // React Router
   const navigate = useNavigate();
+
+  // Use location from React Router to check if the current URL contains '/form'
   const location = useLocation();
+  const isFormPage = location.pathname.includes("/form");
 
   const [lat, lng] = useUrlPosition();
   const urlPosition = { lat: Number(lat), lng: Number(lng) };
@@ -124,9 +127,6 @@ function MapView() {
       mapRef.current.panTo(coordinates); // This smoothly pans the map
     }
   }, [coordinates]);
-
-  // Check if the current URL contains '/form'
-  const isFormPage = location.pathname.includes("/form");
 
   return (
     <div className={`${styles.mapview} ${isFormPage ? styles.waiting : ""}`}>

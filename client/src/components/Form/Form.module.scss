@@ -7,17 +7,22 @@
   height: 72%;
 }
 
+.form.fullLength {
+  height: 100%;
+  padding-top: 0.8rem;
+}
+
 .formImg {
   position: absolute;
   z-index: 999;
   right: -4.3px;
-  top: -98.7px;
+  top: 0.8rem;
   transform: translateX(100%);
   padding: 0.8rem;
   background-color: rgba(179, 175, 177, 0.3098039216);
   border-radius: 0.9rem;
   height: auto;
-  width: 33rem;
+  width: 32rem;
 
   animation: blurIn 1.5s ease;
 

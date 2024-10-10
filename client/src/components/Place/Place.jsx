@@ -1,10 +1,9 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./Place.module.scss";
 import { usePlaces } from "../../contexts/PlacesContext";
 import { useEffect } from "react";
 import Spinner from "../Spinner/Spinner";
 import { useWeather } from "../../contexts/WeatherContext";
-import { useCountry } from "../../contexts/CountryContext";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -28,10 +27,14 @@ function Place() {
     [id, getPlace]
   );
 
-  const { placeName, country, position, date, notes } = currentPlace;
+  const { placeName, country, position, date, notes, rating } = currentPlace;
+
+  // Use location from React Router to check if the current URL contains '/form'
+  const location = useLocation();
+  const isPlacePage = location.pathname.includes("/place");
 
   return (
-    <div className={styles.place}>
+    <div className={`${styles.place} ${isPlacePage ? styles.fullLength : ""}`}>
       <div className={styles.placeWrapper}>
         {isLoading ? (
           <Spinner />
@@ -69,6 +72,15 @@ function Place() {
               </div>
 
               <div className={styles.placeInfoRow}>
+                <span>Your rating on this trip was</span>
+                {rating ? (
+                  <p>{rating}</p>
+                ) : (
+                  <p>No rating available for this trip.</p>
+                )}
+              </div>
+
+              <div className={styles.placeInfoRow}>
                 <span>Your notes</span>
                 {notes ? (
                   <p>{notes}</p>
@@ -80,7 +92,7 @@ function Place() {
               <div className={styles.placeInfoRow}>
                 <span>Learn more</span>
                 <a
-                  href={`https://en.wikipedia.org/wiki/${country}`}
+                  href={`https://en.wikipedia.org/wiki/${placeName}`}
                   target="_blank"
                   rel="noreferrer"
                 >
