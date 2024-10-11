@@ -125,10 +125,8 @@ function PlacesProvider({ children }) {
     try {
       const res = await fetch(`${BASE_URL}/places`, {
         method: "POST",
-        body: JSON.stringify(newPlace),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: newPlace, // Directly pass FormData
+        // No Content-Type header needed; the browser sets it automatically
       });
 
       if (!res.ok) {
