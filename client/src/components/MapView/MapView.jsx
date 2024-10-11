@@ -21,7 +21,6 @@ function MapView() {
     darkMapOption,
     defaultMapOption,
     dispatch,
-    isOpen,
     isDarkMode,
     selectedPlacePosition,
   } = useMap();
@@ -32,6 +31,7 @@ function MapView() {
   // Use location from React Router to check if the current URL contains '/form'
   const location = useLocation();
   const isFormPage = location.pathname.includes("/form");
+  const isPlacesPage = location.pathname.includes("/places");
 
   const [lat, lng] = useUrlPosition();
   const urlPosition = { lat: Number(lat), lng: Number(lng) };
@@ -40,7 +40,7 @@ function MapView() {
   const mapRef = useRef();
   const onLoad = useCallback((map) => (mapRef.current = map), []);
 
-  const { places, isLoading } = usePlaces();
+  const { places } = usePlaces();
   const [markers, setMarkers] = useState([]);
 
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -61,6 +61,9 @@ function MapView() {
         place: place.placeName,
       });
     }
+
+    // Navigate to the URL with the marker's position when clicked
+    navigate(`/app?lat=${marker.position.lat}&lng=${marker.position.lng}`);
 
     setInfoWindowVisible(true);
   };
@@ -128,6 +131,34 @@ function MapView() {
     }
   }, [coordinates]);
 
+  // Automatically open InfoWindow for the marker based on URL lat/lng
+  useEffect(() => {
+    if (isPlacesPage && lat && lng) {
+      const marker = markers.find(
+        (marker) =>
+          marker.position.lat === Number(lat) &&
+          marker.position.lng === Number(lng)
+      );
+
+      if (marker) {
+        const place = places.find(
+          (place) =>
+            place.position.lat === Number(lat) &&
+            place.position.lng === Number(lng)
+        );
+
+        if (place) {
+          setSelectedMarker({
+            ...marker,
+            flag: place.flag,
+            place: place.placeName,
+          });
+          setInfoWindowVisible(true); // Show the InfoWindow for the selected marker
+        }
+      }
+    }
+  }, [isPlacesPage, lat, lng, markers, places]);
+
   return (
     <div className={`${styles.mapview} ${isFormPage ? styles.waiting : ""}`}>
       {/* DARK AND LIGHT MAP THEME */}
@@ -172,6 +203,7 @@ function MapView() {
               scaledSize: new window.google.maps.Size(32, 42.56),
             }}
             onClick={() => handleMarkerClick(marker)} // Trigger InfoWindow on marker click
+            clickable={!isFormPage}
           />
         ))}
 

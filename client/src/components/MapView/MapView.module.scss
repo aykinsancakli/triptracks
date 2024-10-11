@@ -59,7 +59,7 @@
   // ACTUAL MAP WRAPPER
   div {
     cursor: not-allowed;
-    animation: breathe 3s infinite ease alternate-reverse 1s;
+    opacity: 0.98;
   }
 
   button {
@@ -146,12 +146,5 @@
   from {
     filter: blur(3px);
     opacity: 0.3;
-  }
-}
-
-@keyframes breathe {
-  from {
-    // opacity: 0.99;
-    filter: grayscale(100%) brightness(98%);
   }
 }
