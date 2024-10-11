@@ -40,7 +40,7 @@ function MapView() {
   const mapRef = useRef();
   const onLoad = useCallback((map) => (mapRef.current = map), []);
 
-  const { places } = usePlaces();
+  const { places, isLoading } = usePlaces();
   const [markers, setMarkers] = useState([]);
 
   const [selectedMarker, setSelectedMarker] = useState(null);
@@ -97,6 +97,8 @@ function MapView() {
 
   // Effect to set the initial URL if lat and lng are not present
   useEffect(() => {
+    if (isLoading) return;
+
     const lat = urlPosition.lat;
     const lng = urlPosition.lng;
 
@@ -116,12 +118,11 @@ function MapView() {
     }
   }, [
     initialPosition,
-    location,
     navigate,
-    dispatch,
     places,
     urlPosition.lat,
     urlPosition.lng,
+    isLoading,
   ]);
 
   // Effect to smoothly center the map using `panTo`
@@ -207,7 +208,7 @@ function MapView() {
           />
         ))}
 
-        {infoWindowVisible && selectedMarker && markers.length > 0 && (
+        {infoWindowVisible && selectedMarker && isPlacesPage && (
           <InfoWindow
             position={selectedMarker.position}
             onCloseClick={() => setInfoWindowVisible(false)}

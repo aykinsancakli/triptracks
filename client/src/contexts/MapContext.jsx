@@ -4,7 +4,7 @@ const MapContext = createContext();
 
 const initialState = {
   coordinates: null,
-  initialPosition: { lat: 37.0164626, lng: -7.9351983 }, // default to Rome
+  initialPosition: { lat: 37.0164626, lng: -7.9351983 }, // default to Faro, Portugal
   selectedPlacePosition: null,
   isDarkMode: true,
 };
