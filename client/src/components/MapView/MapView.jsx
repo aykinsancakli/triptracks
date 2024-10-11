@@ -207,7 +207,7 @@ function MapView() {
           />
         ))}
 
-        {infoWindowVisible && selectedMarker && (
+        {infoWindowVisible && selectedMarker && markers.length > 0 && (
           <InfoWindow
             position={selectedMarker.position}
             onCloseClick={() => setInfoWindowVisible(false)}
