@@ -14,7 +14,7 @@ import { MdCurrencyExchange } from "react-icons/md";
 import { useCountry } from "../../contexts/CountryContext";
 import Spinner from "../Spinner/Spinner";
 import Message from "../Message/Message";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useWeather } from "../../contexts/WeatherContext";
 import { usePlaces } from "../../contexts/PlacesContext";
 
@@ -101,9 +101,17 @@ function Country() {
             <div className={styles.countryBody}>
               {/* VISITED LABEL FOR COUNTRY BODY */}
               {savedPlace && isSaved && (
-                <div className={styles.visitedLabel}>
-                  Visited on {formatDate(savedPlace.date)}
-                </div>
+                <>
+                  <div className={styles.visitedLabel}>
+                    Visited on {formatDate(savedPlace.date)}
+                  </div>
+                  <Link
+                    className={styles.details}
+                    to={`places/${savedPlace._id}?lat=${lat}&lng=${lng}`}
+                  >
+                    <button>Details &rarr;</button>
+                  </Link>
+                </>
               )}
 
               {/* BOOKMARKS BUTTON */}

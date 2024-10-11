@@ -5,6 +5,8 @@
   position: relative;
 
   height: 72%;
+
+  animation: blurIn 1s ease;
 }
 
 .country.fullLength {
@@ -196,14 +198,44 @@
 
 // VISITED LABEL
 .visitedLabel {
-  box-shadow: 0 0 1rem rgb(10, 189, 10);
-  padding: 0.5rem;
-  background-color: #a3e635;
+  padding: 0.25rem 0.8rem;
+  padding-right: 0;
+  // background-color: #a3e635;
+  border-left: 1px solid #9e9e9e;
   color: #333;
+  color: #b7b7b7;
   position: absolute;
   top: 1rem;
   right: 1rem;
   font-size: 1.3rem;
+}
+
+// DETAILS
+.details {
+  position: absolute;
+  top: 4.2rem;
+  right: 1rem;
+  text-decoration: none;
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 1.4rem;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #cecece;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #a3e635;
+      border-color: #333;
+      color: #333;
+    }
+  }
 }
 
 // ANIMATIONS
