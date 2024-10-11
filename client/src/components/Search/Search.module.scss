@@ -144,6 +144,9 @@
     flex-direction: column;
     gap: 2rem;
 
+    max-height: 24rem;
+    overflow-y: scroll;
+
     opacity: 0;
     pointer-events: none;
 
@@ -161,6 +164,19 @@
     &:hover {
       opacity: 1;
       pointer-events: all;
+    }
+
+    &::-webkit-scrollbar {
+      width: 0.75rem;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #33333361;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #777;
+      border-radius: 1rem;
     }
   }
 }
