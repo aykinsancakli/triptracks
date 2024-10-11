@@ -5,6 +5,8 @@
   position: relative;
 
   height: 72%;
+
+  animation: blurIn 1s ease;
 }
 
 .place.fullLength {
@@ -28,9 +30,34 @@
     background-color: rgba(179, 175, 177, 0.3098039216);
     border-radius: 0.9rem;
     height: auto;
-    width: 32rem;
+    width: 35rem;
 
-    animation: blurIn 1.5s ease;
+    animation: blurIn 0.5s ease;
+
+    div {
+      position: relative;
+
+      .times {
+        position: absolute;
+        right: 4px;
+        top: 4px;
+        background: rgba(28, 28, 28, 0.3882352941);
+        z-index: 999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3.2rem;
+        height: 3.2rem;
+        width: 3.2rem;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background-color: #333333aa;
+        }
+      }
+    }
 
     img {
       display: block;
@@ -143,6 +170,7 @@
     padding-bottom: 0.1rem;
     border-bottom: 1px solid #727272;
     width: 100%;
+    color: #d9d9d9;
   }
 
   a {
@@ -158,6 +186,63 @@
   }
 }
 
+.imgWrap {
+  height: 6rem;
+  width: 6rem;
+  border-radius: 0.4rem;
+  border: 1px solid #cecece;
+  cursor: pointer;
+
+  position: relative;
+  overflow: hidden;
+
+  span {
+    opacity: 0;
+    position: absolute;
+    width: fit-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #aaf735;
+    z-index: 3000;
+    text-decoration: none;
+    font-size: 1.4rem;
+    border-bottom: none;
+    transition: all 0.2s ease;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.1);
+  }
+
+  &:hover span {
+    opacity: 1;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 100;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
 .backBtn {
   display: flex;
   align-items: center;
@@ -168,8 +253,15 @@
   text-transform: uppercase;
   border-radius: 0.4rem;
   cursor: pointer;
+  transition: all 0.2s ease;
 
   background-color: transparent;
-  border: 1px solid var(--color-light--3);
-  color: var(--color-light--3);
+  border: 1px solid;
+  color: #cecece;
+
+  &:hover {
+    border-color: transparent;
+    color: #333;
+    background-color: #aaf735;
+  }
 }

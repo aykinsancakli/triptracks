@@ -1,9 +1,8 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styles from "./Place.module.scss";
 import { usePlaces } from "../../contexts/PlacesContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "../Spinner/Spinner";
-import { useWeather } from "../../contexts/WeatherContext";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -16,9 +15,8 @@ const formatDate = (date) =>
 function Place() {
   const { id } = useParams();
   const { getPlace, currentPlace, isLoading } = usePlaces();
-  const { formImgUrl, isLoading: isLoadingWeather } = useWeather();
-
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(
     function () {
@@ -27,9 +25,10 @@ function Place() {
     [id, getPlace]
   );
 
-  const { placeName, country, position, date, notes, rating } = currentPlace;
+  const { placeName, country, position, date, notes, rating, photoUrl } =
+    currentPlace;
 
-  // Use location from React Router to check if the current URL contains '/form'
+  // Use location from React Router to check if the current URL contains '/place'
   const location = useLocation();
   const isPlacePage = location.pathname.includes("/place");
 
@@ -41,18 +40,26 @@ function Place() {
         ) : (
           <>
             {/* IMAGE */}
-            <div className={styles.formImg}>
-              {isLoadingWeather ? (
-                <Spinner />
-              ) : (
-                <>
-                  <h2>
-                    <span>A photo from {placeName}</span>
-                  </h2>
-                  <img src={formImgUrl} alt={`Picture of ${placeName}`} />
-                </>
-              )}
-            </div>
+            {isOpen && (
+              <div className={styles.formImg}>
+                {photoUrl ? ( // Check if image exists
+                  <div>
+                    <span
+                      className={styles.times}
+                      onClick={() => setIsOpen(false)}
+                    >
+                      &times;
+                    </span>
+                    <h2>
+                      <span>A photo from {placeName}</span>
+                    </h2>
+                    <img src={photoUrl} alt={`Picture of ${placeName}`} />
+                  </div>
+                ) : (
+                  <h2>No image available for this place.</h2>
+                )}
+              </div>
+            )}
 
             {/* PLACE HEADER */}
             <div className={styles.placeHeader}>
@@ -72,7 +79,7 @@ function Place() {
               </div>
 
               <div className={styles.placeInfoRow}>
-                <span>Your rating on this trip was</span>
+                <span>Your trip was</span>
                 {rating ? (
                   <p>{rating}</p>
                 ) : (
@@ -86,6 +93,21 @@ function Place() {
                   <p>{notes}</p>
                 ) : (
                   <p>No notes available for this trip.</p>
+                )}
+              </div>
+
+              <div
+                className={styles.placeInfoRow}
+                onClick={() => setIsOpen((isOpen) => !isOpen)}
+              >
+                <span>Photos from your trip</span>
+                {photoUrl ? (
+                  <div className={styles.imgWrap}>
+                    <span>{!isOpen ? "enlarge" : "shrink"}</span>
+                    <img src={photoUrl} alt="saved image" />
+                  </div>
+                ) : (
+                  <p>No photos available for this trip.</p>
                 )}
               </div>
 
