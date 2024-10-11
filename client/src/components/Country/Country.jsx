@@ -92,7 +92,7 @@ function Country() {
 
               <h2>
                 <span>
-                  {country}, {placeName}
+                  {placeName}, {country}
                 </span>
               </h2>
             </div>

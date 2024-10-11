@@ -1,5 +1,4 @@
 .place {
-  color: #fff;
   border-bottom-left-radius: 0.9rem;
   padding: 0.4rem 0.4rem 0.8rem 0.8rem;
   position: relative;
@@ -130,8 +129,12 @@
     position: absolute;
     bottom: -0.6rem;
     font-size: 1.8rem;
-    background: #333333d9;
-    border-radius: 0.8rem;
+    color: #dedede;
+    box-shadow: inset 1px 2px 1px rgba(218, 218, 218, 0.15);
+    background: #333;
+    border-radius: 0.6rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
     padding: 0.5rem 1rem;
     text-align: center;
   }
@@ -150,7 +153,6 @@
   height: 80%;
 
   h2 {
-    color: #fff;
     font-size: 1.8rem;
   }
 }
@@ -168,9 +170,13 @@
   span {
     font-size: 1.6rem;
     padding-bottom: 0.1rem;
-    border-bottom: 1px solid #727272;
+    border-bottom: 1px solid #515151;
     width: 100%;
-    color: #d9d9d9;
+    color: #dcdcdc;
+  }
+
+  p {
+    color: #ebebeb;
   }
 
   a {

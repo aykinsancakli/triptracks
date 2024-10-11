@@ -105,7 +105,7 @@ function Form() {
           </div>
 
           <div className={styles.row}>
-            <label htmlFor="rating">How was it?</label>
+            <label htmlFor="rating">How was your trip?</label>
 
             <StarRating
               maxRating={5}
@@ -127,7 +127,7 @@ function Form() {
           </div>
 
           <div className={styles.row}>
-            <label htmlFor="photo">Any photos?</label>
+            <label htmlFor="photo">Any photos from your trip?</label>
             <input
               type="file"
               id="photo"

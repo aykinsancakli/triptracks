@@ -96,13 +96,13 @@ function Place() {
                 )}
               </div>
 
-              <div
-                className={styles.placeInfoRow}
-                onClick={() => setIsOpen((isOpen) => !isOpen)}
-              >
+              <div className={styles.placeInfoRow}>
                 <span>Photos from your trip</span>
                 {photoUrl ? (
-                  <div className={styles.imgWrap}>
+                  <div
+                    className={styles.imgWrap}
+                    onClick={() => setIsOpen((isOpen) => !isOpen)}
+                  >
                     <span>{!isOpen ? "enlarge" : "shrink"}</span>
                     <img src={photoUrl} alt="saved image" />
                   </div>
