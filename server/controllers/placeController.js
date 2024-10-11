@@ -37,15 +37,26 @@ exports.getPlace = async (req, res) => {
 
 // POST a new place
 exports.createPlace = async (req, res) => {
-  const { placeName, country, notes, rating, date, userId, flag, position } =
-    req.body;
+  const { placeName, country, notes, rating, date, userId, flag } = req.body;
+  const position = req.body.position ? JSON.parse(req.body.position) : null; // Parse position
 
   try {
-    // Validate incoming data (you can add more validation as needed)
-    if (!placeName || !country || !userId) {
-      return res
-        .status(400)
-        .json({ message: "Place name, country, and user ID are required." });
+    // Save the photo's Cloudinary URL if an image was uploaded
+    const photoUrl = req.file ? req.file.path : null;
+
+    // Validate incoming data
+    if (
+      !placeName ||
+      !country ||
+      !userId ||
+      !position ||
+      !position.lat ||
+      !position.lng
+    ) {
+      return res.status(400).json({
+        message:
+          "Place name, country, user ID, and position (lat/lng) are required.",
+      });
     }
 
     const newPlace = await Place.create({
@@ -57,6 +68,7 @@ exports.createPlace = async (req, res) => {
       userId,
       flag,
       position,
+      photoUrl,
     });
     res.status(201).json(newPlace);
   } catch (err) {

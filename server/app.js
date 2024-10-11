@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 const cors = require("cors");
 
 const countryRouter = require("./routes/countryRoutes");
@@ -7,7 +8,12 @@ const weatherRouter = require("./routes/weatherRoutes");
 
 const app = express();
 
-// CORS middleware
+// Middlewares
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+app.use(express.json());
+
 const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
@@ -15,15 +21,6 @@ const corsOptions = {
       : "http://localhost:5173",
 };
 app.use(cors(corsOptions));
-
-// Middleware for JSON body parsing
-app.use(express.json());
-
-// Logging middleware to log incoming requests
-app.use((req, res, next) => {
-  console.log(`Received ${req.method} request to ${req.url}`);
-  next();
-});
 
 // Routes
 app.use("/api/places", placeRouter);

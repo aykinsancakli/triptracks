@@ -37,6 +37,9 @@ const placeSchema = new mongoose.Schema({
       required: true,
     },
   },
+  photoUrl: {
+    type: String,
+  },
 });
 
 // This Place model defines the schema that will be used to interact with the places collection in MongoDB.
