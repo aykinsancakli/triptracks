@@ -23,7 +23,6 @@
 .form {
   display: flex;
   align-items: center;
-  // width: 45%;
   width: 100%;
 
   input {
@@ -113,6 +112,16 @@
     background-color: var(--color-brand--1);
   }
 
+  &:hover div {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  &:hover ul {
+    opacity: 1;
+    pointer-events: all;
+  }
+
   .placesBtn {
     padding: 1rem;
     border: none;
@@ -143,6 +152,7 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    margin-top: 4.84rem;
 
     max-height: 24rem;
     overflow-y: scroll;
@@ -157,11 +167,17 @@
     font-size: 1.4rem;
     position: absolute;
     background-color: var(--color-brand--2);
-    border-radius: 5px 0 5px 5px;
+    border-radius: 0 0 5px 5px;
     background: #333;
+
     transition: all 0.2s ease;
 
     &:hover {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    &:hover + div {
       opacity: 1;
       pointer-events: all;
     }
@@ -178,6 +194,16 @@
       background: #777;
       border-radius: 1rem;
     }
+  }
+
+  ul + div {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  ul + div:hover {
+    opacity: 1;
+    pointer-events: all;
   }
 }
 

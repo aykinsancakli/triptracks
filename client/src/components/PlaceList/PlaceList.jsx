@@ -5,16 +5,20 @@ import Message from "../Message/Message";
 import PlaceItem from "../PlaceItem/PlaceItem";
 
 function PlaceList() {
-  const { places, isLoading } = usePlaces();
+  const { sortedPlaces, isLoading } = usePlaces();
 
   return (
     <ul>
       {isLoading && <Spinner />}
 
-      {!places.length && <Message message="No bookmarks yet." />}
+      {!sortedPlaces.length && (
+        <Message message="Start by adding your favorite places!" />
+      )}
 
       {!isLoading &&
-        places.map((place) => <PlaceItem place={place} key={place._id} />)}
+        sortedPlaces.map((place) => (
+          <PlaceItem place={place} key={place._id} />
+        ))}
     </ul>
   );
 }

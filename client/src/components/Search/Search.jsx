@@ -11,6 +11,7 @@ import { useMap } from "../../contexts/MapContext";
 import { useLocation, useNavigate } from "react-router-dom";
 import { usePlaces } from "../../contexts/PlacesContext";
 import PlaceList from "../PlaceList/PlaceList";
+import PlacesFilter from "../PlacesFilter/PlacesFilter";
 
 function Search() {
   const [address, setAddress] = useState("");
@@ -114,6 +115,8 @@ function Search() {
         </button>
 
         <PlaceList />
+
+        <PlacesFilter />
       </div>
     </nav>
   );

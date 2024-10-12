@@ -1,4 +1,5 @@
 import {
+  act,
   createContext,
   useCallback,
   useContext,
@@ -12,6 +13,7 @@ const PlacesContext = createContext();
 
 const initialState = {
   places: [],
+  sortedPlaces: [],
   isLoading: false,
   currentPlace: {},
   error: "",
@@ -37,6 +39,7 @@ function reducer(state, action) {
         ...state,
         isLoading: false,
         places: [...state.places, action.payload],
+        sortedPlaces: [...state.sortedPlaces, action.payload],
       };
 
     case "place/deleted":
@@ -44,6 +47,15 @@ function reducer(state, action) {
         ...state,
         isLoading: false,
         places: state.places.filter((place) => place._id !== action.payload),
+        sortedPlaces: state.sortedPlaces.filter(
+          (place) => place._id !== action.payload
+        ),
+      };
+
+    case "places/sorted":
+      return {
+        ...state,
+        sortedPlaces: action.payload,
       };
 
     case "rejected":
@@ -59,10 +71,8 @@ function reducer(state, action) {
 }
 
 function PlacesProvider({ children }) {
-  const [{ places, isLoading, currentPlace, error }, dispatch] = useReducer(
-    reducer,
-    initialState
-  );
+  const [{ places, sortedPlaces, isLoading, currentPlace, error }, dispatch] =
+    useReducer(reducer, initialState);
 
   useEffect(function () {
     async function fetchPlaces() {
@@ -79,6 +89,7 @@ function PlacesProvider({ children }) {
 
         const data = await res.json();
         dispatch({ type: "places/loaded", payload: data });
+        dispatch({ type: "places/sorted", payload: data });
       } catch (error) {
         // Send the actual error message back to the state
         dispatch({
@@ -185,12 +196,14 @@ function PlacesProvider({ children }) {
     <PlacesContext.Provider
       value={{
         places,
+        sortedPlaces,
         isLoading,
         currentPlace,
         getPlace,
         createPlace,
         deletePlace,
         error,
+        dispatch,
       }}
     >
       {children}

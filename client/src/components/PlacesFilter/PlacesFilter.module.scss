@@ -1,0 +1,51 @@
+.placesFilter {
+  background-color: #333;
+  padding: 1rem;
+  z-index: 999999999999;
+  position: absolute;
+  transform: translate(-25.365rem, 100%);
+  bottom: 0;
+  width: 37.5rem;
+  border-radius: 0.5rem 0 0 0;
+  transition: all 0.2s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  h2 {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    color: #dedede;
+    font-style: italic;
+
+    padding-right: 1rem;
+    border-right: 1px solid #515151;
+  }
+
+  div {
+    display: flex;
+    gap: 1rem;
+  }
+
+  button {
+    padding: 0.5rem 1rem;
+    font-size: 1.4rem;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    color: #cecece;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #a3e635;
+      border-color: #333;
+      color: #333;
+    }
+  }
+}
