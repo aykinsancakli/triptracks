@@ -51,7 +51,7 @@ function Place() {
                       &times;
                     </span>
                     <h2>
-                      <span>A photo from {placeName}</span>
+                      <span>A memory from {placeName}</span>
                     </h2>
                     <img src={photoUrl} alt={`Picture of ${placeName}`} />
                   </div>

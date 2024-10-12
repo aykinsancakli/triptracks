@@ -186,7 +186,8 @@ function MapView() {
           isFormPage
             ? urlPosition || initialPosition // Use coordinates if on the form page
             : places.length > 0
-            ? selectedPlacePosition || {
+            ? selectedPlacePosition ||
+              selectedMarker?.position || {
                 lat: Number(places[places.length - 1].position.lat), // Center on the latest place
                 lng: Number(places[places.length - 1].position.lng),
               }
