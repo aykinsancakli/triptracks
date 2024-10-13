@@ -4,12 +4,13 @@ import PlaceList from "../PlaceList/PlaceList";
 import PlacesFilter from "../PlacesFilter/PlacesFilter";
 import SearchAutocomplete from "../SearchAutocomplete/SearchAutocomplete";
 import Places from "../Places/Places";
+import Logo from "../Logo/Logo";
 
 function Nav() {
   return (
     <nav className={styles.nav}>
       {/* LOGO */}
-      <h1 className={styles.logo}>TripTracks</h1>
+      <Logo />
 
       {/* SEARCHBAR */}
       <SearchAutocomplete />
