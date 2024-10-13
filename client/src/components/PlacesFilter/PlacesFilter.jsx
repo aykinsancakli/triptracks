@@ -28,8 +28,12 @@ function PlacesFilter() {
     <div className={styles.placesFilter}>
       <h2>Your trip history</h2>
       <div>
-        <button onClick={() => handleSort("name")}>Sort by name</button>
-        <button onClick={() => handleSort("date")}>Sort by date</button>
+        {places.length > 1 && (
+          <>
+            <button onClick={() => handleSort("name")}>Sort by name</button>
+            <button onClick={() => handleSort("date")}>Sort by date</button>
+          </>
+        )}
       </div>
     </div>
   );

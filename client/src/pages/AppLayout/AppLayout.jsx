@@ -2,7 +2,7 @@ import { useLoadScript } from "@react-google-maps/api";
 
 import styles from "./AppLayout.module.scss";
 
-import Search from "../../components/Search/Search";
+import Nav from "../../components/Nav/Nav";
 import Main from "../../components/Main/Main";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import MapView from "../../components/MapView/MapView";
@@ -17,7 +17,7 @@ function AppLayout() {
   return (
     isLoaded && (
       <div className={styles.app}>
-        <Search />
+        <Nav />
         <Main>
           <Sidebar />
           <MapView />
