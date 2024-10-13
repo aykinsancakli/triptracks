@@ -1,0 +1,94 @@
+.formWrapper {
+  width: 45%;
+  position: relative;
+}
+
+// SEARCHBAR
+.form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  input {
+    background-color: #373535ea;
+    color: var(--color-light--3);
+    padding: 1.6rem 2.4rem;
+    border: none;
+    border-radius: 10rem;
+    font-size: 1.6rem;
+    width: 100%;
+
+    &::placeholder {
+      color: var(--color-light--3);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  // SEARCH BUTTON
+  button {
+    padding: 0 2rem;
+    height: 5.04rem;
+    background-color: var(--color-brand--1);
+    color: var(--color-light--2);
+    border: none;
+    border-radius: 10rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 1.25px;
+    text-transform: uppercase;
+    margin-left: -10rem;
+    z-index: 100;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    transition: all 0.2s;
+  }
+}
+
+// DISABLED STATES
+.btnDisabled {
+  cursor: not-allowed !important;
+  filter: grayscale(60%) !important;
+  color: #d6d6d6 !important;
+}
+
+.inputDisabled {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+}
+
+// SEARCH DROPDOWN
+.autoDropdown {
+  position: absolute;
+  top: 6rem;
+  z-index: 100;
+  width: 100%;
+  border-radius: 0.9rem !important;
+
+  span {
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    font-family: inherit;
+  }
+
+  div {
+    padding: 1.6rem 2rem;
+    font-size: 1.5rem;
+    font-family: inherit;
+
+    &:first-child {
+      border-top-left-radius: 0.9rem;
+      border-top-right-radius: 0.9rem;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: 0.9rem;
+      border-bottom-right-radius: 0.9rem;
+    }
+  }
+}
