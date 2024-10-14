@@ -21,6 +21,8 @@
 
   &:hover .placesBtn {
     background-color: #33333361;
+    box-shadow: 0 1px 0 0 #84cc16 inset, -1px 0 0 0 #84cc16 inset,
+      1px 0 0 0 #84cc16 inset;
   }
 
   &:hover .num {
@@ -43,6 +45,7 @@
     border-radius: 9px 9px 0 0;
     background-color: transparent;
     color: var(--color-light--3);
+    font-weight: 600;
     font-size: 1.4rem;
     text-transform: uppercase;
     letter-spacing: 1.5px;

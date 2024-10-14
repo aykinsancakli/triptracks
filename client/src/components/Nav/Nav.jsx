@@ -1,10 +1,11 @@
 import styles from "./Nav.module.scss";
 
+import SearchAutocomplete from "../SearchAutocomplete/SearchAutocomplete";
+import Logo from "../Logo/Logo";
+import Stats from "../Stats/Stats";
+import Places from "../Places/Places";
 import PlaceList from "../PlaceList/PlaceList";
 import PlacesFilter from "../PlacesFilter/PlacesFilter";
-import SearchAutocomplete from "../SearchAutocomplete/SearchAutocomplete";
-import Places from "../Places/Places";
-import Logo from "../Logo/Logo";
 
 function Nav() {
   return (
@@ -14,6 +15,9 @@ function Nav() {
 
       {/* SEARCHBAR */}
       <SearchAutocomplete />
+
+      {/* STATS */}
+      <Stats />
 
       {/* PLACES */}
       <Places>
