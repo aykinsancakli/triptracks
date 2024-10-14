@@ -202,21 +202,20 @@
 .visitedLabel {
   padding: 0.25rem 0.8rem;
   padding-right: 0;
-  // background-color: #a3e635;
   border-left: 1px solid #9e9e9e;
   color: #333;
   color: #b7b7b7;
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.3rem;
+  top: 0.4rem;
+  right: 0.6rem;
+  font-size: 1.1rem;
 }
 
 // DETAILS
 .details {
   position: absolute;
-  top: 4.2rem;
-  right: 1rem;
+  top: 3.2rem;
+  right: 0.6rem;
   text-decoration: none;
 
   button {
