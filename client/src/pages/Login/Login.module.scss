@@ -1,0 +1,74 @@
+.login {
+  padding: 2.5rem 5rem;
+  background-color: var(--color-dark--0);
+  height: 100vh;
+}
+
+@keyframes blurIn {
+  0% {
+    filter: blur(4px);
+    opacity: 0.4;
+  }
+
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.form {
+  background-color: var(--color-dark--1);
+  border-radius: 7px;
+  padding: 2rem 3rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  /* Different from other form */
+  width: 48rem;
+  margin: 8rem auto;
+  // animation: blurIn 0.4s ease-in-out;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.btn {
+  color: inherit;
+  text-transform: uppercase;
+  padding: 0.8rem 1.6rem;
+  font-family: inherit;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 700;
+  background-color: var(--color-brand--1);
+  color: var(--color-dark--1);
+}
+
+label {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  font-family: inherit;
+  font-size: 1.6rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-light--3);
+  transition: all 0.2s;
+}
+
+input:focus {
+  outline: none;
+  background-color: #fff;
+}
