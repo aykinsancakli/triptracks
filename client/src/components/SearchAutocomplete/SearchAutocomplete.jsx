@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "./SearchAutocomplete.module.scss";
-
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
@@ -22,6 +21,12 @@ function SearchAutocomplete() {
   const location = useLocation();
   const isFormPage = location.pathname.includes("/form");
 
+  // Search options to restrict search to cities and countries only
+  const searchOptions = {
+    types: ["(regions)"], // Can use "(regions)" to include countries
+    language: "en", // Restrict search to English results
+  };
+
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const ll = await getLatLng(results[0]);
@@ -37,13 +42,14 @@ function SearchAutocomplete() {
       value={address}
       onChange={setAddress}
       onSelect={handleSelect}
+      searchOptions={searchOptions} // Pass search options
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-        <div className={styles.formWrapper} key={suggestions.description}>
+        <div className={styles.formWrapper}>
           <div className={styles.form}>
             <input
               {...getInputProps({
-                placeholder: "Search Places ...",
+                placeholder: "Search Cities or Countries ...", // Adjusted placeholder text
                 className: "location-search-input",
               })}
               disabled={isFormPage}
@@ -64,8 +70,8 @@ function SearchAutocomplete() {
                 : "suggestion-item";
               // inline style for demonstration purpose
               const style = suggestion.active
-                ? { backgroundColor: "#373535ea", cursor: "pointer" }
-                : { backgroundColor: "#1d1b1b", cursor: "pointer" };
+                ? { backgroundColor: "#1d1b1b", cursor: "pointer" }
+                : { backgroundColor: "#373535ea", cursor: "pointer" };
               return (
                 <div
                   key={suggestion.description}
