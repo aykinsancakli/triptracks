@@ -1,7 +1,12 @@
+import { Link } from "react-router-dom";
 import styles from "./Logo.module.scss";
 
 function Logo() {
-  return <h1 className={styles.logo}>TripTracks</h1>;
+  return (
+    <Link to="/">
+      <span className={styles.logo}>TripTracks</span>
+    </Link>
+  );
 }
 
 export default Logo;
