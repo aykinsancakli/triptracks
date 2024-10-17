@@ -14,6 +14,8 @@ import Login from "./pages/Login/Login";
 
 import AppLayout from "./pages/AppLayout/AppLayout";
 import Product from "./pages/Product/Product";
+import LoginForm from "./components/LoginForm/LoginForm";
+import SignUpForm from "./components/SignUpForm/SignUpForm";
 
 function App() {
   return (
@@ -26,7 +28,10 @@ function App() {
                 <Route index element={<Homepage />} />
                 <Route path="pricing" element={<Pricing />} />
                 <Route path="product" element={<Product />} />
-                <Route path="login" element={<Login />} />
+                <Route path="login" element={<Login />}>
+                  <Route index element={<LoginForm />} />
+                  <Route path="signup" element={<SignUpForm />} />
+                </Route>
                 <Route path="app" element={<AppLayout />}>
                   <Route index element={<Country />} />
                   <Route path="places/:id" element={<Place />} />
