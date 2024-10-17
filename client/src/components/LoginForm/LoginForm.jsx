@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./LoginForm.module.scss";
 import { Link, useNavigate } from "react-router-dom";
+import { usePlaces } from "../../contexts/PlacesContext";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -10,6 +11,7 @@ function LoginForm() {
   const [errors, setErrors] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
+  const { fetchPlaces } = usePlaces();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -31,6 +33,7 @@ function LoginForm() {
       }
 
       if (data.user) {
+        fetchPlaces();
         navigate("/app");
       }
     } catch (err) {

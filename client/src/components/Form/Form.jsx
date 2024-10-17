@@ -41,7 +41,6 @@ function Form() {
     formData.append("notes", notes);
     formData.append("rating", rating);
     formData.append("position", JSON.stringify({ lat, lng }));
-    formData.append("userId", "64321f08b91d9c2e4cb6e023"); // Add userId here for now
     if (photoFile) {
       formData.append("image", photoFile); // Append the photo file if it exists
     }

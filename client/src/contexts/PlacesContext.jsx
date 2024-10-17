@@ -1,11 +1,4 @@
-import {
-  act,
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useReducer,
-} from "react";
+import { createContext, useCallback, useContext, useReducer } from "react";
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -74,33 +67,30 @@ function PlacesProvider({ children }) {
   const [{ places, sortedPlaces, isLoading, currentPlace, error }, dispatch] =
     useReducer(reducer, initialState);
 
-  useEffect(function () {
-    async function fetchPlaces() {
-      dispatch({ type: "loading" });
+  async function fetchPlaces() {
+    dispatch({ type: "loading" });
 
-      try {
-        const res = await fetch(`${BASE_URL}/places`);
+    try {
+      const res = await fetch(`${BASE_URL}/places`, {
+        method: "GET", // Explicitly set the method
+        credentials: "include", // This ensures cookies (like JWT) are sent
+      });
 
-        if (!res.ok) {
-          // Handle the case where the response status is not OK (e.g., 404 or 500)
-          const errorData = await res.json();
-          throw new Error(errorData.message || "Failed to fetch places.");
-        }
-
-        const data = await res.json();
-        dispatch({ type: "places/loaded", payload: data });
-        dispatch({ type: "places/sorted", payload: data });
-      } catch (error) {
-        // Send the actual error message back to the state
-        dispatch({
-          type: "rejected",
-          payload: error.message || "There was an error loading places...",
-        });
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Failed to fetch places.");
       }
-    }
 
-    fetchPlaces();
-  }, []);
+      const data = await res.json();
+      dispatch({ type: "places/loaded", payload: data });
+      dispatch({ type: "places/sorted", payload: data });
+    } catch (error) {
+      dispatch({
+        type: "rejected",
+        payload: error.message || "There was an error loading places...",
+      });
+    }
+  }
 
   const getPlace = useCallback(
     async function getPlace(id) {
@@ -110,7 +100,10 @@ function PlacesProvider({ children }) {
       dispatch({ type: "loading" });
 
       try {
-        const res = await fetch(`${BASE_URL}/places/${id}`);
+        const res = await fetch(`${BASE_URL}/places/${id}`, {
+          method: "GET", // Explicitly set the method
+          credentials: "include", // This ensures cookies (like JWT) are sent
+        });
 
         // Handle HTTP errors
         if (!res.ok) {
@@ -136,8 +129,8 @@ function PlacesProvider({ children }) {
     try {
       const res = await fetch(`${BASE_URL}/places`, {
         method: "POST",
-        body: newPlace, // Directly pass FormData
-        // No Content-Type header needed; the browser sets it automatically
+        body: newPlace,
+        credentials: "include",
       });
 
       if (!res.ok) {
@@ -162,7 +155,8 @@ function PlacesProvider({ children }) {
 
     try {
       const response = await fetch(`${BASE_URL}/places/${id}`, {
-        method: "DELETE",
+        method: "DELETE", // Explicitly set the method
+        credentials: "include", // This ensures cookies (like JWT) are sent
       });
 
       if (response.ok) {
@@ -201,6 +195,7 @@ function PlacesProvider({ children }) {
         currentPlace,
         getPlace,
         createPlace,
+        fetchPlaces,
         deletePlace,
         error,
         dispatch,
