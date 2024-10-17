@@ -1,13 +1,41 @@
 import { useState } from "react";
 import styles from "./LoginForm.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({ email: "", password: "" });
+
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    setErrors({ email: "", password: "" });
+
+    try {
+      const res = await fetch(`${BASE_URL}/login`, {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const data = await res.json();
+      console.log(data);
+
+      if (data.errors) {
+        setErrors(data.errors);
+      }
+
+      if (data.user) {
+        navigate("/app");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -28,6 +56,9 @@ function LoginForm() {
           value={email}
           placeholder="Email"
         />
+        <span className={styles.error}>
+          {errors.email && <p>{errors.email}</p>}
+        </span>
       </div>
 
       <div className={styles.row}>
@@ -39,6 +70,9 @@ function LoginForm() {
           value={password}
           placeholder="Password"
         />
+        <span className={styles.error}>
+          {errors.password && <p>{errors.password}</p>}
+        </span>
       </div>
 
       <div>
