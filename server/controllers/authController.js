@@ -8,6 +8,32 @@ const handleErrors = (err) => {
   // Create the error object to be returned later
   let errors = { email: "", password: "" };
 
+  // Not valid email and password
+  if (err.message === "not a valid email and password") {
+    errors.email = "Please enter an email";
+    errors.password = "Please enter a password";
+  }
+
+  // Not valid email
+  if (err.message === "not a valid email") {
+    errors.email = "Please enter an email";
+  }
+
+  // Not valid password
+  if (err.message === "not a valid password") {
+    errors.password = "Please enter a password";
+  }
+
+  // Incorrect email
+  if (err.message === "incorrect email") {
+    errors.email = "Email is not registered";
+  }
+
+  // Incorrect password
+  if (err.message === "incorrect password") {
+    errors.password = "Incorrect password";
+  }
+
   // Duplicate error code
   if (err.code === 11000) {
     errors.email = "Email is already registered";
@@ -34,7 +60,7 @@ const createToken = (id) => {
 };
 
 // Sign Up
-exports.signUp = async (req, res) => {
+exports.signup = async (req, res) => {
   const { email, password } = req.body;
 
   try {
@@ -42,6 +68,21 @@ exports.signUp = async (req, res) => {
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user: user._id });
+  } catch (err) {
+    const errors = handleErrors(err);
+    res.status(400).json({ errors });
+  }
+};
+
+// Login
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await User.login(email, password);
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.status(200).json({ user: user._id });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
