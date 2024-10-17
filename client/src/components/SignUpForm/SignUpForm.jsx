@@ -38,11 +38,12 @@ function SignUpForm() {
         setSuccessMessage("Account successfully created!");
         setAccountCreated(true);
 
-        // Hide success message after 4 seconds
+        // Simulate server processing time with a slight delay
+        const processingTime = Math.random() * 1500 + 500;
         setTimeout(() => {
           setSuccessMessage("");
           navigate("/app");
-        }, 2000);
+        }, processingTime);
       }
     } catch (err) {
       console.log(err);
