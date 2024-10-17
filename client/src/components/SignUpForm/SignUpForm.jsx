@@ -39,7 +39,7 @@ function SignUpForm() {
         setAccountCreated(true);
 
         // Simulate server processing time with a slight delay
-        const processingTime = Math.random() * 1500 + 500;
+        const processingTime = Math.random() * 500 + 1500;
         setTimeout(() => {
           setSuccessMessage("");
           navigate("/app");
@@ -64,7 +64,7 @@ function SignUpForm() {
             <div className={styles.row}>
               <label htmlFor="email">Email address</label>
               <input
-                type="text"
+                type="email"
                 id="email"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
