@@ -5,6 +5,7 @@ const cors = require("cors");
 const countryRouter = require("./routes/countryRoutes");
 const placeRouter = require("./routes/placeRoutes");
 const weatherRouter = require("./routes/weatherRoutes");
+const authRouter = require("./routes/authRoutes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ const corsOptions = {
     process.env.NODE_ENV === "production"
       ? "https://your-production-url.com"
       : "http://localhost:5173",
+  credentials: true,
 };
 app.use(cors(corsOptions));
 
@@ -26,5 +28,6 @@ app.use(cors(corsOptions));
 app.use("/api/places", placeRouter);
 app.use("/api/weather", weatherRouter);
 app.use("/api/country", countryRouter);
+app.use("/api", authRouter);
 
 module.exports = app;
