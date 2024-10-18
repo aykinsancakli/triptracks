@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import styles from "./Logo.module.scss";
+import logo from "../../assets/TripTracks-logo.png";
 
 function Logo() {
   return (
-    <Link to="/" className={styles.logo}>
-      <span>TripTracks</span>
+    <Link to="/">
+      <img src={logo} alt="TripTracks logo" className={styles.logo} />
     </Link>
   );
 }
