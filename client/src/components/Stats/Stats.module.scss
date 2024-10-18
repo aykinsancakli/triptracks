@@ -1,7 +1,4 @@
 .stats {
-  margin-left: auto;
-  margin-right: 3.2rem;
-
   .statsBtn {
     color: var(--color-light--3);
     font-weight: 600;
@@ -318,6 +315,17 @@
 .active {
   box-shadow: 0 0 0 1px #84cc16 inset;
   background-color: #33333361 !important;
+}
+
+.waiting {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+
+  button {
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
+    pointer-events: none;
+  }
 }
 
 // ANIMATION

@@ -59,8 +59,7 @@ function SearchAutocomplete() {
               disabled={isFormPage}
               className={`${isFormPage ? `${styles.btnDisabled}` : ""}`}
             >
-              <FaSearchLocation size={20} />
-              Search
+              <FaSearchLocation size={24} />
             </button>
           </div>
           <div className={styles.autoDropdown}>

@@ -13,7 +13,7 @@ const mapOptions = {
   disableDefaultUI: true,
   zoomControl: false,
   mapTypeControl: false,
-  streetViewControl: true,
+  streetViewControl: false,
   fullscreenControl: false,
   clickableIcons: false,
 };

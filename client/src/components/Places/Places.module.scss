@@ -124,3 +124,15 @@
     pointer-events: all;
   }
 }
+
+// DISABLED STATES
+.placesDisabled {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+
+  button {
+    cursor: not-allowed !important;
+    opacity: 0.5 !important;
+    pointer-events: none;
+  }
+}

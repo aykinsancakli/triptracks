@@ -2,6 +2,7 @@ import { usePlaces } from "../../contexts/PlacesContext";
 import styles from "./Stats.module.scss";
 import { IoStatsChart } from "react-icons/io5";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -13,6 +14,10 @@ const formatDate = (date) =>
 
 function Stats() {
   const { places } = usePlaces();
+
+  // Use location from React Router to check if the current URL contains '/form'
+  const location = useLocation();
+  const isFormPage = location.pathname.includes("/form");
 
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
@@ -48,7 +53,7 @@ function Stats() {
   });
 
   return (
-    <div className={styles.stats}>
+    <div className={`${styles.stats} ${isFormPage ? styles.waiting : ""}`}>
       {/* STATS BUTTON */}
       <button
         className={`${styles.statsBtn} ${isStatsOpen ? styles.active : ""}`}
@@ -111,7 +116,7 @@ function Stats() {
               {places.length > 0
                 ? `You have visited ${uniqueCountries.length} countries and 
             ${totalPlaces} different places. 🎉`
-                : `It looks like you haven't added any places yet. Start exploring and keep track of your amazing travels! 🌍`}
+                : `Start exploring and keep track of your amazing travels! 🌍`}
             </p>
           </div>
 
@@ -130,8 +135,7 @@ function Stats() {
                 ))
               ) : (
                 <p className={styles.noFlags}>
-                  No countries visited yet. Start your adventure and add some
-                  places to see the flags here! 🎌
+                  Add some places to see the flags! 🎌
                 </p>
               )}
             </div>
@@ -173,8 +177,7 @@ function Stats() {
                 )
               ) : (
                 <p className={styles.noPhotos}>
-                  No photos uploaded yet. Capture and upload your travel
-                  memories here! 📸
+                  Your travel memories will appear here! 📸
                 </p>
               )}
             </div>

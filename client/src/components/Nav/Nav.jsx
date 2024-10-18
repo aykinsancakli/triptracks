@@ -16,14 +16,15 @@ function Nav() {
       {/* SEARCHBAR */}
       <SearchAutocomplete />
 
-      {/* STATS */}
-      <Stats />
+      {/* STATS & PLACES */}
+      <div className={styles.statsPlaces}>
+        <Stats />
 
-      {/* PLACES */}
-      <Places>
-        <PlaceList />
-        <PlacesFilter />
-      </Places>
+        <Places>
+          <PlaceList />
+          <PlacesFilter />
+        </Places>
+      </div>
     </nav>
   );
 }

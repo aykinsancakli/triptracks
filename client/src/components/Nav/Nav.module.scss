@@ -6,15 +6,11 @@
   background-color: var(--color-dark--0);
   padding: 1.6rem 3.2rem;
   height: 8rem;
-}
 
-// DISABLED STATES
-.placesDisabled {
-  cursor: not-allowed !important;
-  opacity: 0.5 !important;
-
-  button {
-    cursor: not-allowed !important;
-    opacity: 0.5 !important;
+  .statsPlaces {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3.2rem;
   }
 }
