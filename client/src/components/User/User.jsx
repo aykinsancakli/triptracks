@@ -1,6 +1,6 @@
-import { useAuth } from "../../contexts/AuthContext";
 import styles from "./User.module.scss";
 import { FaCircleUser } from "react-icons/fa6";
+import { useAuth } from "../../contexts/AuthContext";
 
 function User() {
   const { user, logout } = useAuth();

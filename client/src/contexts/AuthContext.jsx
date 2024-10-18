@@ -144,7 +144,8 @@ function AuthProvider({ children }) {
       }
 
       if (data.user) {
-        dispatch({ type: "signup/success" });
+        console.log(data.user);
+        dispatch({ type: "signup/success", payload: data.user });
         return data.user;
       }
     } catch (err) {

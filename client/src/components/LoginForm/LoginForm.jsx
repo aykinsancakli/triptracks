@@ -18,9 +18,8 @@ function LoginForm() {
     const user = await login(email, password);
 
     if (user) {
-      console.log(user);
-      fetchPlaces();
       navigate("/app");
+      fetchPlaces();
     }
   }
 

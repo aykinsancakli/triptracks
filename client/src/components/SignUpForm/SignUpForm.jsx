@@ -17,10 +17,10 @@ function SignUpForm() {
     dispatch({ type: "signup/error", payload: { email: "", password: "" } }); // Clear previous errors
 
     const user = await signup(email, password);
-
+    console.log(user);
     if (user) {
-      fetchPlaces();
       navigate("/app");
+      fetchPlaces();
     }
   }
 
