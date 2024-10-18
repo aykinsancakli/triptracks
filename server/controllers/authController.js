@@ -122,3 +122,9 @@ exports.checkAuth = async (req, res) => {
     return res.status(403).json({ message: "Invalid token" });
   }
 };
+
+// Logout
+exports.logout = (req, res) => {
+  res.cookie("jwt", "", { maxAge: 1 });
+  res.status(200).json({ message: "Logged out" });
+};

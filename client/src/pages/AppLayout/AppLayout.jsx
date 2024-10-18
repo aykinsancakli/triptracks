@@ -6,6 +6,7 @@ import Nav from "../../components/Nav/Nav";
 import Main from "../../components/Main/Main";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import MapView from "../../components/MapView/MapView";
+import User from "../../components/User/User";
 
 function AppLayout() {
   // Load maps script => (need after this point since we are in the app)
@@ -22,6 +23,7 @@ function AppLayout() {
           <Sidebar />
           <MapView />
         </Main>
+        <User />
       </div>
     )
   );

@@ -67,7 +67,32 @@ function PlacesProvider({ children }) {
   const [{ places, sortedPlaces, isLoading, currentPlace, error }, dispatch] =
     useReducer(reducer, initialState);
 
-  async function fetchPlaces() {
+  // async function fetchPlaces() {
+  //   dispatch({ type: "loading" });
+
+  //   try {
+  //     const res = await fetch(`${BASE_URL}/places`, {
+  //       method: "GET", // Explicitly set the method
+  //       credentials: "include", // This ensures cookies (like JWT) are sent
+  //     });
+
+  //     if (!res.ok) {
+  //       const errorData = await res.json();
+  //       throw new Error(errorData.message || "Failed to fetch places.");
+  //     }
+
+  //     const data = await res.json();
+  //     dispatch({ type: "places/loaded", payload: data });
+  //     dispatch({ type: "places/sorted", payload: data });
+  //   } catch (error) {
+  //     dispatch({
+  //       type: "rejected",
+  //       payload: error.message || "There was an error loading places...",
+  //     });
+  //   }
+  // }
+
+  const fetchPlaces = useCallback(async () => {
     dispatch({ type: "loading" });
 
     try {
@@ -90,7 +115,7 @@ function PlacesProvider({ children }) {
         payload: error.message || "There was an error loading places...",
       });
     }
-  }
+  }, [dispatch]); // `dispatch` is stable, so it won’t cause unnecessary recreation
 
   const getPlace = useCallback(
     async function getPlace(id) {

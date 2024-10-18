@@ -1,0 +1,38 @@
+.user {
+  position: absolute;
+  top: 10.2rem;
+  right: 2.3rem;
+  background-color: #374151e3;
+  color: #d1d5db;
+  padding: 1rem 1.4rem;
+  border-radius: 0.9rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  border: 1px solid #5f5d5ded;
+
+  .userName {
+    text-transform: capitalize;
+  }
+
+  button {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: inherit;
+    padding: 0.5rem 1rem;
+    border-radius: 0.7rem;
+    border: none;
+    background-color: #f3f4f6;
+    color: #022c22;
+    transition: all 0.2s ease;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #d1d5db;
+    }
+  }
+}

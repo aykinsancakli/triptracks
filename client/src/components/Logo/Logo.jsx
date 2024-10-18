@@ -3,8 +3,8 @@ import styles from "./Logo.module.scss";
 
 function Logo() {
   return (
-    <Link to="/">
-      <span className={styles.logo}>TripTracks</span>
+    <Link to="/" className={styles.logo}>
+      <span>TripTracks</span>
     </Link>
   );
 }

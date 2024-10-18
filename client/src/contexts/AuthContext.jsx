@@ -54,8 +54,15 @@ function reducer(state, action) {
         errors: action.payload,
       };
 
+    case "logout":
+      return {
+        ...state,
+        user: null,
+        isAuthenticated: false,
+      };
+
     default:
-      return state;
+      throw new Error("Unknown action type");
   }
 }
 
@@ -84,7 +91,7 @@ function AuthProvider({ children }) {
           }
         }
       } catch (err) {
-        console.log(err);
+        console.error(err);
         dispatch({ type: "auth/error" });
       }
     }
@@ -114,7 +121,7 @@ function AuthProvider({ children }) {
         return data.user;
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 
@@ -141,7 +148,21 @@ function AuthProvider({ children }) {
         return data.user;
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
+    }
+  }
+
+  async function logout() {
+    try {
+      await fetch(`${BASE_URL}/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+
+      // Clear user and auth status
+      dispatch({ type: "logout" });
+    } catch (err) {
+      console.error("Logout failed:", err);
     }
   }
 
@@ -153,6 +174,7 @@ function AuthProvider({ children }) {
         errors,
         login,
         signup,
+        logout,
         dispatch,
       }}
     >
