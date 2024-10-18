@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import { AuthProvider } from "./contexts/AuthContext";
 import { MapProvider } from "./contexts/MapContext";
 import { WeatherProvider } from "./contexts/WeatherContext";
 import { CountryProvider } from "./contexts/CountryContext";
@@ -16,32 +17,45 @@ import AppLayout from "./pages/AppLayout/AppLayout";
 import Product from "./pages/Product/Product";
 import LoginForm from "./components/LoginForm/LoginForm";
 import SignUpForm from "./components/SignUpForm/SignUpForm";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
   return (
     <BrowserRouter>
-      <PlacesProvider>
-        <MapProvider>
-          <WeatherProvider>
-            <CountryProvider>
-              <Routes>
-                <Route index element={<Homepage />} />
-                <Route path="pricing" element={<Pricing />} />
-                <Route path="product" element={<Product />} />
-                <Route path="login" element={<Login />}>
-                  <Route index element={<LoginForm />} />
-                  <Route path="signup" element={<SignUpForm />} />
-                </Route>
-                <Route path="app" element={<AppLayout />}>
-                  <Route index element={<Country />} />
-                  <Route path="places/:id" element={<Place />} />
-                  <Route path="form" element={<Form />} />
-                </Route>
-              </Routes>
-            </CountryProvider>
-          </WeatherProvider>
-        </MapProvider>
-      </PlacesProvider>
+      <AuthProvider>
+        <PlacesProvider>
+          <MapProvider>
+            <WeatherProvider>
+              <CountryProvider>
+                <Routes>
+                  {/* Pages */}
+                  <Route index element={<Homepage />} />
+                  <Route path="pricing" element={<Pricing />} />
+                  <Route path="product" element={<Product />} />
+                  <Route path="login" element={<Login />}>
+                    <Route index element={<LoginForm />} />
+                    <Route path="signup" element={<SignUpForm />} />
+                  </Route>
+
+                  {/* Protected Routes */}
+                  <Route
+                    path="app"
+                    element={
+                      <ProtectedRoute>
+                        <AppLayout />
+                      </ProtectedRoute>
+                    }
+                  >
+                    <Route index element={<Country />} />
+                    <Route path="places/:id" element={<Place />} />
+                    <Route path="form" element={<Form />} />
+                  </Route>
+                </Routes>
+              </CountryProvider>
+            </WeatherProvider>
+          </MapProvider>
+        </PlacesProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

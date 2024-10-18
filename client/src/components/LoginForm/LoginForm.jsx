@@ -1,45 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./LoginForm.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { usePlaces } from "../../contexts/PlacesContext";
-
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+import { useAuth } from "../../contexts/AuthContext";
 
 function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({ email: "", password: "" });
 
   const navigate = useNavigate();
+  const { login, errors, dispatch } = useAuth();
   const { fetchPlaces } = usePlaces();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    setErrors({ email: "", password: "" });
+    const user = await login(email, password);
 
-    try {
-      const res = await fetch(`${BASE_URL}/login`, {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-      const data = await res.json();
-      console.log(data);
-
-      if (data.errors) {
-        setErrors(data.errors);
-      }
-
-      if (data.user) {
-        fetchPlaces();
-        navigate("/app");
-      }
-    } catch (err) {
-      console.log(err);
+    if (user) {
+      console.log(user);
+      fetchPlaces();
+      navigate("/app");
     }
   }
+
+  // Clear the errors on first mount
+  useEffect(() => {
+    dispatch({ type: "login/error", payload: { email: "", password: "" } });
+  }, [dispatch]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>

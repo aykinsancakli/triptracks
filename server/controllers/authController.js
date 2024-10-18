@@ -67,7 +67,12 @@ exports.signup = async (req, res) => {
     const user = await User.create({ email, password });
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(201).json({ user: user._id });
+    res.status(201).json({
+      user: {
+        id: user._id,
+        email: user.email,
+      },
+    });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
@@ -82,9 +87,38 @@ exports.login = async (req, res) => {
     const user = await User.login(email, password);
     const token = createToken(user._id);
     res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ user: user._id });
+    res.status(200).json({
+      user: {
+        id: user._id,
+        email: user.email,
+      },
+    });
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).json({ errors });
+  }
+};
+
+exports.checkAuth = async (req, res) => {
+  const token = req.cookies.jwt;
+
+  if (!token) return res.status(401).json({ message: "Unauthorized" });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
+
+    if (user) {
+      return res.status(200).json({
+        user: {
+          id: user._id,
+          email: user.email,
+        },
+      });
+    } else {
+      return res.status(404).json({ message: "User not found" });
+    }
+  } catch {
+    return res.status(403).json({ message: "Invalid token" });
   }
 };
