@@ -1,6 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Logo from "../Logo/Logo";
 import styles from "./PageNav.module.scss";
+import { IoIosMenu } from "react-icons/io";
 
 function PageNav() {
   return (
@@ -8,6 +9,10 @@ function PageNav() {
       <nav className={styles.nav}>
         <Logo />
 
+        {/* Menu icon */}
+        <IoIosMenu className={styles.hamburgerMenu} />
+
+        {/* Desktop nav */}
         <ul>
           <li>
             <NavLink to="/pricing">Pricing</NavLink>

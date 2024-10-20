@@ -22,18 +22,6 @@ FONT SIZE SYSTEM (px)
   --color-light--3: #f3f4f6;
 }
 
-// Media Query Manager
-@mixin respond($breakpoint) {
-  @media (max-width: $breakpoint) {
-    @content;
-  }
-}
-
-// Breakpoints
-$bp-largest: 75em; // 1200px
-$bp-large: 68.75em; // 1100px
-$bp-medium: 60.5em; // 968px
-
 *,
 *::after,
 *::before {
