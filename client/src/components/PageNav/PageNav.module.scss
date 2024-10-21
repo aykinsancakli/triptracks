@@ -2,7 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
   overflow: hidden;
+  z-index: 999;
 }
 
 .nav ul {
@@ -44,59 +46,52 @@ a.ctaLink:visited {
   }
 }
 
-.menuBtn {
-  display: none;
-  font-size: 4rem;
-  color: var(--color-brand--1);
-  cursor: pointer;
-
-  @media (max-width: 48em) {
-    display: block;
-  }
-}
-
+.menuBtn,
 .menuCloseBtn {
   display: none;
   font-size: 4rem;
   color: var(--color-brand--1);
   cursor: pointer;
-  z-index: 99999;
-
-  position: absolute;
-  top: 3.4rem;
-  right: 3rem;
 
   @media (max-width: 48em) {
     display: block;
   }
 }
 
-.mobileNavList {
-  padding: 12rem 2rem;
-  background-color: var(--color-dark--0);
-
-  position: absolute;
+.mobileNav {
+  background-color: #1d1d1ded;
+  position: fixed;
   top: 0;
-  right: 0;
-  width: 24rem;
+  left: 0;
+  width: 100vw;
   height: 100vh;
-
-  transform: translateX(100%);
-  transition: all 0.35s ease;
+  transition: all 0.45s ease;
 
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 4rem;
 
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
+  li {
+    list-style: none;
+  }
+
+  li a {
+    text-decoration: none;
+    color: var(--color-light--2);
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 600;
+  }
 }
 
-.mobileNavList.open {
-  transform: translateX(0);
-  pointer-events: all;
-  visibility: visible;
+.menuClosed {
+  left: 100%;
+  opacity: 0.25;
+}
+
+.menuOpen {
+  left: 0;
   opacity: 1;
 }

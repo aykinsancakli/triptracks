@@ -42,7 +42,12 @@ function PageNav() {
       </nav>
 
       {/* Mobile nav */}
-      <ul className={`${styles.mobileNavList} ${isOpen ? styles.navOpen : ""}`}>
+      <ul
+        className={`${styles.mobileNav} ${
+          isOpen ? styles.menuOpen : styles.menuClosed
+        }`}
+        onClick={() => setIsOpen(false)}
+      >
         <li>
           <NavLink to="/pricing">Pricing</NavLink>
         </li>
@@ -50,7 +55,9 @@ function PageNav() {
           <NavLink to="/product">Product</NavLink>
         </li>
         <li>
-          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/login" className={styles.ctaLink}>
+            Login
+          </NavLink>
         </li>
       </ul>
     </>
