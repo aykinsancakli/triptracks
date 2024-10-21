@@ -33,6 +33,12 @@ FONT SIZE SYSTEM (px)
 html {
   font-size: 62.5%;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
+
+  @include respond($bp-small) {
+    font-size: 56.25%;
+  }
 }
 
 body {
@@ -40,4 +46,5 @@ body {
   color: var(--color-light--2);
   font-weight: 400;
   line-height: 1.6;
+  overflow-x: hidden;
 }
