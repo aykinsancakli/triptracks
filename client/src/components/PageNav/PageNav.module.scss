@@ -84,6 +84,13 @@ a.ctaLink:visited {
     font-size: 2rem;
     font-weight: 600;
   }
+
+  .ctaLink:link,
+  .ctaLink:visited {
+    &:hover {
+      background-color: var(--color-brand--1);
+    }
+  }
 }
 
 .menuClosed {
