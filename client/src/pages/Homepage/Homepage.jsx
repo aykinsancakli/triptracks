@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Homepage.module.scss";
 import PageNav from "../../components/PageNav/PageNav";
+import signature from "../../assets/signature.png";
 
 function Homepage() {
   return (
@@ -22,6 +23,11 @@ function Homepage() {
           Start tracking now
         </Link>
       </section>
+
+      <footer>
+        Designed and Developed by
+        <img src={signature} alt="Aykın Sancaklı's signature" />
+      </footer>
     </main>
   );
 }
