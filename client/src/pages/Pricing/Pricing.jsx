@@ -1,6 +1,6 @@
 import PageNav from "../../components/PageNav/PageNav";
 import styles from "../Product/Product.module.scss";
-import img from "../../assets/img-2.jpg";
+import img from "../../assets/img-2.webp";
 
 function Pricing() {
   return (

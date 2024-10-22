@@ -1,6 +1,6 @@
 import PageNav from "../../components/PageNav/PageNav";
 import styles from "./Product.module.scss";
-import img from "../../assets/img-1.jpg";
+import img from "../../assets/img-1.webp";
 
 function Product() {
   return (

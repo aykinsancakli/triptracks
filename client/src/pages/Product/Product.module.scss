@@ -7,12 +7,85 @@
   height: 100vh;
   animation: imgLoad 3s ease-in forwards 0.5s;
 
+  overflow: hidden;
+
+  // Preload images
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+
+    /* Preload desktop images */
+    background-image: url("../../assets/bg-01.webp"),
+      url("../../assets/bg-02.webp"), url("../../assets/bg-03.webp"),
+      url("../../assets/bg-04.webp");
+
+    /* Preload mobile images */
+    @media (max-width: $bp-tablet) {
+      background-image: url("../../assets/bg-01-mobile.webp"),
+        url("../../assets/bg-02-mobile.webp"),
+        url("../../assets/bg-03-mobile.webp"),
+        url("../../assets/bg-04-mobile.webp");
+    }
+  }
+
   @include respond($bp-tablet) {
     padding: 2.5rem 3rem;
 
     background-image: url("../../assets/bg-00-mobile.webp");
     animation: imgLoadMobile 3s ease-in forwards 0.5s;
   }
+}
+
+.product section {
+  height: calc(100vh - 10.84rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6.4rem;
+
+  @include respond($bp-tablet) {
+    height: calc(100vh - 10.24rem);
+  }
+
+  @include respond($bp-phone) {
+    flex-direction: column;
+    gap: 4.8rem;
+  }
+}
+
+.description {
+  animation: slowRise 1s ease;
+}
+
+.product .img {
+  width: 30%;
+  display: block;
+  border-radius: 0.9rem;
+
+  animation: moveInRight 1s ease;
+
+  @include respond($bp-phone) {
+    width: 65%;
+  }
+}
+
+.product h2 {
+  font-size: 4rem;
+  line-height: 1.2;
+  margin-bottom: 3rem;
+}
+
+.product p {
+  max-width: 42rem;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.product section a {
+  margin-top: 2rem;
 }
 
 @keyframes imgLoad {
@@ -59,47 +132,18 @@
   }
 }
 
-.product section {
-  height: calc(100vh - 10.84rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6.4rem;
-
-  @include respond($bp-tablet) {
-    height: calc(100vh - 10.24rem);
-  }
-
-  @include respond($bp-phone) {
-    flex-direction: column;
-    gap: 4.8rem;
+@keyframes slowRise {
+  0% {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translateY(3rem);
   }
 }
 
-.product .img {
-  width: 30%;
-  display: block;
-
-  @include respond($bp-phone) {
-    width: 65%;
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translateX(5rem);
   }
-}
-
-.description {
-}
-
-.product h2 {
-  font-size: 4rem;
-  line-height: 1.2;
-  margin-bottom: 3rem;
-}
-
-.product p {
-  max-width: 42rem;
-  font-size: 1.6rem;
-  margin-bottom: 2rem;
-}
-
-.product section a {
-  margin-top: 2rem;
 }

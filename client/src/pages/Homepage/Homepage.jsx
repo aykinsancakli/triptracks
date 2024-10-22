@@ -26,7 +26,11 @@ function Homepage() {
 
       <footer>
         Designed and Developed by
-        <img src={signature} alt="Aykın Sancaklı's signature" />
+        <img
+          className={styles.signature}
+          src={signature}
+          alt="Aykın Sancaklı's signature"
+        />
       </footer>
     </main>
   );
