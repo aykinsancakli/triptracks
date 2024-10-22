@@ -9,7 +9,7 @@
   background-position: center;
   padding: 2.5rem 5rem;
 
-  @include respond($bp-small) {
+  @include respond($bp-tablet) {
     padding: 2.5rem 3rem;
   }
 }
@@ -31,7 +31,7 @@
   animation: fadeIn 1.3s ease-in-out;
 
   span {
-    @include respond($bp-small) {
+    @include respond($bp-tablet) {
       display: none;
     }
   }

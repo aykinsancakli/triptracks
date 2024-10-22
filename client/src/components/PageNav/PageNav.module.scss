@@ -13,7 +13,7 @@
   align-items: center;
   gap: 4rem;
 
-  @include respond($bp-small) {
+  @include respond($bp-tablet) {
     display: none;
   }
 }

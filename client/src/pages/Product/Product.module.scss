@@ -1,33 +1,91 @@
 .product {
   padding: 2.5rem 5rem;
-  background-color: var(--color-dark--0);
+  background-image: url("../../assets/bg-00.webp");
+
+  background-size: cover;
+  background-position: center;
   height: 100vh;
+  animation: imgLoad 3s ease-in forwards 0.5s;
+
+  @include respond($bp-tablet) {
+    padding: 2.5rem 3rem;
+
+    background-image: url("../../assets/bg-00-mobile.webp");
+    animation: imgLoadMobile 3s ease-in forwards 0.5s;
+  }
 }
 
-@keyframes blurIn {
+@keyframes imgLoad {
   0% {
-    filter: blur(4px);
-    opacity: 0.4;
+    background-image: url("../../assets/bg-00.webp");
+  }
+
+  25% {
+    background-image: url("../../assets/bg-01.webp");
+  }
+
+  50% {
+    background-image: url("../../assets/bg-02.webp");
+  }
+
+  75% {
+    background-image: url("../../assets/bg-03.webp");
   }
 
   100% {
-    filter: blur(0);
-    opacity: 1;
+    background-image: url("../../assets/bg-04.webp");
+  }
+}
+
+@keyframes imgLoadMobile {
+  0% {
+    background-image: url("../../assets/bg-00-mobile.webp");
+  }
+
+  25% {
+    background-image: url("../../assets/bg-01-mobile.webp");
+  }
+
+  50% {
+    background-image: url("../../assets/bg-02-mobile.webp");
+  }
+
+  75% {
+    background-image: url("../../assets/bg-03-mobile.webp");
+  }
+
+  100% {
+    background-image: url("../../assets/bg-04-mobile.webp");
   }
 }
 
 .product section {
-  width: clamp(80rem, 80%, 90rem);
-  margin: 6rem auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7rem;
+  height: calc(100vh - 10.84rem);
+  display: flex;
   align-items: center;
-  // animation: blurIn 0.4s ease-in-out;
+  justify-content: center;
+  gap: 6.4rem;
+
+  @include respond($bp-tablet) {
+    height: calc(100vh - 10.24rem);
+  }
+
+  @include respond($bp-phone) {
+    flex-direction: column;
+    gap: 4.8rem;
+  }
 }
 
-.product img {
-  width: 100%;
+.product .img {
+  width: 30%;
+  display: block;
+
+  @include respond($bp-phone) {
+    width: 65%;
+  }
+}
+
+.description {
 }
 
 .product h2 {
@@ -37,6 +95,7 @@
 }
 
 .product p {
+  max-width: 42rem;
   font-size: 1.6rem;
   margin-bottom: 2rem;
 }

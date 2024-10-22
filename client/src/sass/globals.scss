@@ -36,7 +36,7 @@ html {
   -webkit-tap-highlight-color: transparent;
   overflow-x: hidden;
 
-  @include respond($bp-small) {
+  @include respond($bp-tablet) {
     font-size: 56.25%;
   }
 }
