@@ -1,5 +1,66 @@
 .login {
   padding: 2.5rem 5rem;
-  background-color: var(--color-dark--0);
+  background-image: url("../../assets/login-00.webp");
+
+  background-size: cover;
+  background-position: center;
   height: 100vh;
+  animation: imgLoad 2s ease-in forwards 0.5s;
+
+  overflow: hidden;
+
+  // Preload images
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+
+    /* Preload desktop images */
+    background-image: url("../../assets/login-00.webp"),
+      url("../../assets/login-02.webp"), url("../../assets/login-03.webp"),
+      url("../../assets/login-04.webp"), url("../../assets/login-05.webp");
+
+    /* Preload mobile images */
+    @media (max-width: $bp-tablet) {
+      background-image: url("../../assets/bg-01-mobile.webp"),
+        url("../../assets/bg-02-mobile.webp"),
+        url("../../assets/bg-03-mobile.webp"),
+        url("../../assets/bg-04-mobile.webp");
+    }
+  }
+
+  @include respond($bp-tablet) {
+    padding: 2.5rem 3rem;
+
+    background-image: url("../../assets/bg-00-mobile.webp");
+    animation: imgLoadMobile 3s ease-in forwards 0.5s;
+  }
+}
+
+@keyframes imgLoad {
+  0% {
+    background-image: url("../../assets/login-00.webp");
+  }
+
+  20% {
+    background-image: url("../../assets/login-01.webp");
+  }
+
+  40% {
+    background-image: url("../../assets/login-02.webp");
+  }
+
+  60% {
+    background-image: url("../../assets/login-03.webp");
+  }
+
+  80% {
+    background-image: url("../../assets/login-04.webp");
+  }
+
+  100% {
+    background-image: url("../../assets/login-05.webp");
+  }
 }
