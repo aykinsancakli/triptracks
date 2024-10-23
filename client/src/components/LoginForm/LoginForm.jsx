@@ -33,7 +33,7 @@ function LoginForm() {
       <div className={styles.heading}>
         <h2>Log in to TripTracks</h2>
         <p>
-          Don&apos;t have an account? <Link to="signup">Sign up</Link>
+          Don&apos;t have an account? <Link to="/signup">Sign up</Link>
         </p>
       </div>
 
