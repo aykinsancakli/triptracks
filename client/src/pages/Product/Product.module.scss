@@ -5,7 +5,7 @@
   background-size: cover;
   background-position: center;
   height: 100vh;
-  animation: imgLoad 1.6s ease-in forwards 0.5s;
+  animation: imgLoad 4s ease-in forwards 0.5s;
 
   overflow: hidden;
 
@@ -35,7 +35,7 @@
     padding: 2.5rem 3rem;
 
     background-image: url("../../assets/bg-00-mobile.webp");
-    animation: imgLoadMobile 3s ease-in forwards 0.5s;
+    animation: imgLoadMobile 4s ease-in forwards 0.5s;
   }
 }
 
