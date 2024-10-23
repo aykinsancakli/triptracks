@@ -15,9 +15,8 @@ import Login from "./pages/Login/Login";
 
 import AppLayout from "./pages/AppLayout/AppLayout";
 import Product from "./pages/Product/Product";
-import LoginForm from "./components/LoginForm/LoginForm";
-import SignUpForm from "./components/SignUpForm/SignUpForm";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Signup from "./pages/Signup/Signup";
 
 function App() {
   return (
@@ -32,10 +31,8 @@ function App() {
                   <Route index element={<Homepage />} />
                   <Route path="pricing" element={<Pricing />} />
                   <Route path="product" element={<Product />} />
-                  <Route path="login" element={<Login />}>
-                    <Route index element={<LoginForm />} />
-                    <Route path="signup" element={<SignUpForm />} />
-                  </Route>
+                  <Route path="login" element={<Login />} />
+                  <Route path="signup" element={<Signup />} />
 
                   {/* Protected Routes */}
                   <Route
