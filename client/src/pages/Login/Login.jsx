@@ -1,8 +1,9 @@
 import styles from "./Login.module.scss";
 import PageNav from "../../components/PageNav/PageNav";
-import { Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect } from "react";
+import LoginForm from "../../components/LoginForm/LoginForm";
 
 function Login() {
   const { isAuthenticated } = useAuth();
@@ -15,8 +16,9 @@ function Login() {
   return (
     <main className={styles.login}>
       <PageNav />
-
-      <Outlet />
+      <section className={styles.formContainer}>
+        <LoginForm />
+      </section>
     </main>
   );
 }

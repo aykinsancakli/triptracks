@@ -5,7 +5,7 @@
   background-size: cover;
   background-position: center;
   height: 100vh;
-  animation: imgLoad 2s ease-in forwards 0.5s;
+  animation: imgLoad 5s ease-in forwards 0.5s;
 
   overflow: hidden;
 
@@ -19,23 +19,37 @@
 
     /* Preload desktop images */
     background-image: url("../../assets/login-00.webp"),
-      url("../../assets/login-02.webp"), url("../../assets/login-03.webp"),
-      url("../../assets/login-04.webp"), url("../../assets/login-05.webp");
+      url("../../assets/login-01.webp"), url("../../assets/login-02.webp"),
+      url("../../assets/login-03.webp"), url("../../assets/login-04.webp"),
+      url("../../assets/login-05.webp");
 
     /* Preload mobile images */
     @media (max-width: $bp-tablet) {
-      background-image: url("../../assets/bg-01-mobile.webp"),
-        url("../../assets/bg-02-mobile.webp"),
-        url("../../assets/bg-03-mobile.webp"),
-        url("../../assets/bg-04-mobile.webp");
+      background-image: url("../../assets/login-00-mobile.webp"),
+        url("../../assets/login-01-mobile.webp"),
+        url("../../assets/login-02-mobile.webp"),
+        url("../../assets/login-03-mobile.webp"),
+        url("../../assets/login-04-mobile.webp"),
+        url("../../assets/login-05-mobile.webp");
     }
   }
 
   @include respond($bp-tablet) {
     padding: 2.5rem 3rem;
 
-    background-image: url("../../assets/bg-00-mobile.webp");
-    animation: imgLoadMobile 3s ease-in forwards 0.5s;
+    background-image: url("../../assets/login-00-mobile.webp");
+    animation: imgLoadMobile 5s ease-in forwards 0.5s;
+  }
+}
+
+.formContainer {
+  height: calc(100vh - 10.84rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include respond($bp-tablet) {
+    height: calc(100vh - 10.24rem);
   }
 }
 
@@ -62,5 +76,31 @@
 
   100% {
     background-image: url("../../assets/login-05.webp");
+  }
+}
+
+@keyframes imgLoadMobile {
+  0% {
+    background-image: url("../../assets/login-00-mobile.webp");
+  }
+
+  20% {
+    background-image: url("../../assets/login-01-mobile.webp");
+  }
+
+  40% {
+    background-image: url("../../assets/login-02-mobile.webp");
+  }
+
+  60% {
+    background-image: url("../../assets/login-03-mobile.webp");
+  }
+
+  80% {
+    background-image: url("../../assets/login-04-mobile.webp");
+  }
+
+  100% {
+    background-image: url("../../assets/login-05-mobile.webp");
   }
 }
