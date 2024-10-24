@@ -17,6 +17,7 @@ import AppLayout from "./pages/AppLayout/AppLayout";
 import Product from "./pages/Product/Product";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Signup from "./pages/Signup/Signup";
+import PageNotFound from "./pages/PageNotFound/PageNotFound";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
                     <Route path="places/:id" element={<Place />} />
                     <Route path="form" element={<Form />} />
                   </Route>
+                  <Route path="*" element={<PageNotFound />} />
                 </Routes>
               </CountryProvider>
             </WeatherProvider>
