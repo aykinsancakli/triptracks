@@ -8,10 +8,12 @@ import { CountryProvider } from "./contexts/CountryContext";
 import { PlacesProvider } from "./contexts/PlacesContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
-import Place from "./components/Place/Place";
-import Country from "./components/Country/Country";
-import Form from "./components/Form/Form";
 import SpinnerFullPage from "./components/SpinnerFullPage/SpinnerFullPage";
+import Spinner from "./components/Spinner/Spinner";
+
+const Place = lazy(() => import("./components/Place/Place"));
+const Country = lazy(() => import("./components/Country/Country"));
+const Form = lazy(() => import("./components/Form/Form"));
 
 const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
 const Pricing = lazy(() => import("./pages/Pricing/Pricing"));
@@ -25,36 +27,57 @@ function App() {
   return (
     <AuthProvider>
       <PlacesProvider>
-        <MapProvider>
-          <WeatherProvider>
-            <CountryProvider>
-              <BrowserRouter>
-                <Suspense fallback={<SpinnerFullPage />}>
-                  <Routes>
-                    <Route index element={<Homepage />} />
-                    <Route path="pricing" element={<Pricing />} />
-                    <Route path="product" element={<Product />} />
-                    <Route path="login" element={<Login />} />
-                    <Route path="signup" element={<Signup />} />
-                    <Route
-                      path="app"
-                      element={
-                        <ProtectedRoute>
+        <BrowserRouter>
+          <Suspense fallback={<SpinnerFullPage />}>
+            <Routes>
+              <Route index element={<Homepage />} />
+              <Route path="pricing" element={<Pricing />} />
+              <Route path="product" element={<Product />} />
+              <Route path="login" element={<Login />} />
+              <Route path="signup" element={<Signup />} />
+              <Route
+                path="app"
+                element={
+                  <ProtectedRoute>
+                    <MapProvider>
+                      <WeatherProvider>
+                        <CountryProvider>
                           <AppLayout />
-                        </ProtectedRoute>
-                      }
-                    >
-                      <Route index element={<Country />} />
-                      <Route path="places/:id" element={<Place />} />
-                      <Route path="form" element={<Form />} />
-                    </Route>
-                    <Route path="*" element={<PageNotFound />} />
-                  </Routes>
-                </Suspense>
-              </BrowserRouter>
-            </CountryProvider>
-          </WeatherProvider>
-        </MapProvider>
+                        </CountryProvider>
+                      </WeatherProvider>
+                    </MapProvider>
+                  </ProtectedRoute>
+                }
+              >
+                <Route
+                  index
+                  element={
+                    <Suspense fallback={<Spinner />}>
+                      <Country />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="places/:id"
+                  element={
+                    <Suspense fallback={<Spinner />}>
+                      <Place />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="form"
+                  element={
+                    <Suspense fallback={<Spinner />}>
+                      <Form />
+                    </Suspense>
+                  }
+                />
+              </Route>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
       </PlacesProvider>
     </AuthProvider>
   );
