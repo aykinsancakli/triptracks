@@ -1,0 +1,20 @@
+.spinnerFullPage {
+  height: 100vh;
+  background-image: url(../../assets/bg-00.webp);
+  background-position: center;
+  background-size: cover;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+
+  img {
+    opacity: 0.7;
+  }
+
+  @include respond($bp-tablet) {
+    background-image: url(../../assets/bg-00-mobile.webp);
+  }
+}

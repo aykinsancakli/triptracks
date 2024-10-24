@@ -24,7 +24,7 @@ function Pricing() {
         <img
           className={styles.img}
           src={img}
-          alt="overview of a large city with skyscrapers"
+          alt="Window view of a lake and mountains."
         />
       </section>
     </main>

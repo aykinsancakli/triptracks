@@ -11,15 +11,15 @@ function Product() {
         <img
           className={styles.img}
           src={img}
-          alt="person with dog overlooking mountain with sunset"
+          alt="Person canoeing on a river"
         />
         <div className={styles.description}>
           <h2>About TripTracks</h2>
           <p>
             TripTracks is your personal travel companion, designed to preserve
-            the memories of every journey. Whether you’re exploring bustling
-            cities or hidden corners of the world, TripTracks ensures no moment
-            goes unnoticed.
+            the memories of every journey. Whether you&apos;re exploring
+            bustling cities or hidden corners of the world, TripTracks ensures
+            no moment goes unnoticed.
           </p>
           <p>
             With TripTracks, every place you visit is saved, every memory

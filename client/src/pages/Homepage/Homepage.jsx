@@ -12,7 +12,7 @@ function Homepage() {
         <h1>
           Every journey has a story.
           <br />
-          <span>TripTracks brings your moments to life.</span>
+          <span>TripTracks brings your stories to life.</span>
         </h1>
         <h2>
           A world map that turns every place you visit into a piece of your
