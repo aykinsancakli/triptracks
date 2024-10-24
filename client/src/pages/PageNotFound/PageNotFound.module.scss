@@ -10,6 +10,10 @@
   flex-direction: column;
   color: var(--color-light--1);
 
+  @include respond($bp-tablet) {
+    background-image: url(../../assets/bg-00-mobile.webp);
+  }
+
   span {
     font-size: 7rem;
   }
