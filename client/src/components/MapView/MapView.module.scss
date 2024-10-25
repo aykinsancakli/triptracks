@@ -1,7 +1,7 @@
 .mapview {
   height: calc(100vh - 8rem);
   width: 80%;
-  background-color: #1d1b1b;
+  background-color: var(--color-dark--0);
   padding: 0.8rem 0.8rem 0.8rem 0.4rem;
   position: relative;
 
@@ -88,7 +88,7 @@
 :global {
   /* Customize the InfoWindow container */
   .gm-style-iw {
-    background-color: rgba(117, 160, 38, 0.603) !important;
+    background-color: #22c55ecb !important;
     border-radius: 10px !important;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
     width: auto !important;
@@ -112,7 +112,6 @@
 
   /* Customize the content area */
   .gm-style-iw-d {
-    background-color: rgba(40, 171, 17, 0.279) !important;
     padding: 10px !important;
     text-align: center !important;
     overflow: hidden !important;

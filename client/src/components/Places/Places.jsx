@@ -22,7 +22,7 @@ function Places({ children }) {
           isFormPage ? `${styles.placesDisabled}` : ""
         }`}
       >
-        <MdBookmarkAdded size={32} color="#84cc16" />
+        <MdBookmarkAdded size={32} color="#22c55e" />
         <span>Places</span>
         {places.length > 0 && (
           <span className={styles.num}>{places.length}</span>

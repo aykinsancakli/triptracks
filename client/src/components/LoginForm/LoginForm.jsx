@@ -66,7 +66,9 @@ function LoginForm() {
       </div>
 
       <div>
-        <button className={styles.btn}>Login</button>
+        <button onClick={handleSubmit} className={styles.btn}>
+          Login
+        </button>
       </div>
     </form>
   );

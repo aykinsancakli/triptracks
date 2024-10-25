@@ -1,7 +1,11 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  background-color: #1d1b1b;
+  background-color: var(--color-dark--0);
   height: calc(100vh - 8rem);
   width: 20%;
+
+  @include respond($bp-tablet-landscape) {
+    width: 30%;
+  }
 }

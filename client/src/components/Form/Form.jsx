@@ -109,7 +109,7 @@ function Form() {
             <StarRating
               maxRating={5}
               size={26}
-              color="#84cc16"
+              color="#22c55e"
               messages={messages}
               onSetRating={setUserRating}
             />

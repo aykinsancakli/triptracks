@@ -173,11 +173,11 @@
 .population,
 .currency {
   font-size: 2.4rem;
-  color: #acff2fab;
+  color: var(--color-brand--1);
 }
 
 .bookmark {
-  color: #acff2fab;
+  color: var(--color-brand--1);
   font-size: 1.8rem;
   position: absolute;
   top: 4px;
@@ -232,7 +232,7 @@
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: #a3e635;
+      background-color: var(--color-brand--1);
       border-color: #333;
       color: #333;
     }

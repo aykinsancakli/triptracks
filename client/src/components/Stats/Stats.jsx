@@ -59,7 +59,7 @@ function Stats() {
         className={`${styles.statsBtn} ${isStatsOpen ? styles.active : ""}`}
         onClick={() => setIsStatsOpen((isStatsOpen) => !isStatsOpen)}
       >
-        <IoStatsChart size={32} color="#84cc16" />
+        <IoStatsChart size={32} color="#22c55e" />
         <span>Stats</span>
       </button>
 

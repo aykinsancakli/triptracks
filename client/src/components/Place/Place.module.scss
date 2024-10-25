@@ -81,11 +81,7 @@
       span {
         -webkit-box-decoration-break: clone;
         box-decoration-break: clone;
-        background-image: linear-gradient(
-          to bottom right,
-          #aaf735c1,
-          #d2cbcbb0
-        );
+        background-image: linear-gradient(to bottom right, #22c55e, #d2cbcbb0);
         padding: 1rem 2rem;
       }
     }
@@ -181,13 +177,13 @@
 
   a {
     text-decoration: none;
-    color: #aaf735;
+    color: var(--color-brand--1);
     border-bottom: 1px solid transparent;
     width: fit-content;
     transition: all 0.2s;
 
     &:hover {
-      border-bottom: 1px solid #aaf735;
+      border-bottom: 1px solid var(--color-brand--1);
     }
   }
 }
@@ -209,7 +205,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #aaf735;
+    color: var(--color-brand--1);
     z-index: 3000;
     text-decoration: none;
     font-size: 1.4rem;
@@ -268,6 +264,6 @@
   &:hover {
     border-color: transparent;
     color: #333;
-    background-color: #aaf735;
+    background-color: var(--color-light-brand--1);
   }
 }

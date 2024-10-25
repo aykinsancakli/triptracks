@@ -18,7 +18,7 @@
 
     &:hover {
       background-color: #33333361;
-      box-shadow: 0 0 0 1px #84cc16 inset;
+      box-shadow: 0 0 0 1px var(--color-brand--1) inset;
     }
   }
 
@@ -47,7 +47,7 @@
     animation: blurIn 0.2s ease-in;
 
     h4 {
-      color: #84cc16;
+      color: var(--color-brand--1);
       font-size: 1.8rem;
       margin-top: 0.5rem;
     }
@@ -63,7 +63,7 @@
       right: 1rem;
 
       background-color: rgba(0, 0, 0, 0.5);
-      color: #84cc16;
+      color: var(--color-brand--1);
       border: none;
       padding: 1rem;
       height: 4rem;
@@ -167,7 +167,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #aaf735;
+            color: var(--color-brand--1);
             z-index: 3000;
             text-decoration: none;
             text-transform: lowercase;
@@ -230,7 +230,11 @@
       span {
         -webkit-box-decoration-break: clone;
         box-decoration-break: clone;
-        background-image: linear-gradient(to bottom right, #aaf735, #d0cfcf);
+        background-image: linear-gradient(
+          to bottom right,
+          var(--color-brand--1),
+          #d0cfcf
+        );
         padding: 1rem 2rem;
 
         img {
@@ -256,7 +260,7 @@
       top: 2rem;
       right: 28.5%;
       background-color: rgba(0, 0, 0, 0.5);
-      color: #84cc16;
+      color: var(--color-brand--1);
       border: none;
       padding: 1rem;
       height: 5rem;
@@ -280,7 +284,7 @@
       position: absolute;
       top: 50%;
       background-color: rgba(0, 0, 0, 0.5);
-      color: #84cc16;
+      color: var(--color-brand--1);
       border: none;
       padding: 1rem;
       height: 5rem;
@@ -313,16 +317,15 @@
 }
 
 .active {
-  box-shadow: 0 0 0 1px #84cc16 inset;
+  box-shadow: 0 0 0 1px var(--color-brand--1) inset;
   background-color: #33333361 !important;
 }
 
 .waiting {
-  cursor: not-allowed !important;
   opacity: 0.5 !important;
+  pointer-events: none;
 
   button {
-    cursor: not-allowed !important;
     opacity: 0.5 !important;
     pointer-events: none;
   }

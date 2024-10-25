@@ -21,8 +21,9 @@
 
   &:hover .placesBtn {
     background-color: #33333361;
-    box-shadow: 0 1px 0 0 #84cc16 inset, -1px 0 0 0 #84cc16 inset,
-      1px 0 0 0 #84cc16 inset;
+    box-shadow: 0 1px 0 0 var(--color-brand--1) inset,
+      -1px 0 0 0 var(--color-brand--1) inset,
+      1px 0 0 0 var(--color-brand--1) inset;
   }
 
   &:hover .num {
@@ -129,10 +130,5 @@
 .placesDisabled {
   cursor: not-allowed !important;
   opacity: 0.5 !important;
-
-  button {
-    cursor: not-allowed !important;
-    opacity: 0.5 !important;
-    pointer-events: none;
-  }
+  pointer-events: none;
 }

@@ -48,11 +48,17 @@
     h2 {
       font-size: 3.2rem;
       text-align: center;
+      background: linear-gradient(105deg, #86efac 0%, #4ade80 50%, #86efac 55%);
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     p {
       text-align: center;
       font-size: 1.6rem;
+      color: var(--color-light--1);
 
       a {
         text-decoration: none;

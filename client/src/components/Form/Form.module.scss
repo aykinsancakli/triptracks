@@ -76,7 +76,11 @@
     span {
       -webkit-box-decoration-break: clone;
       box-decoration-break: clone;
-      background-image: linear-gradient(to bottom right, #aaf735c1, #d2cbcbb0);
+      background-image: linear-gradient(
+        to bottom right,
+        var(--color-brand--1),
+        #d2cbcbb0
+      );
       padding: 1rem 2rem;
     }
   }
@@ -130,7 +134,7 @@
     border: none;
     border-radius: 5px;
     background-color: var(--color-light--3);
-    background-color: #1d1b1b;
+    background-color: var(--color-dark--0);
     color: #ebebeb;
     transition: all 0.2s;
 
@@ -141,7 +145,7 @@
   }
 
   textarea {
-    background-color: #1d1b1b;
+    background-color: var(--color-dark--0);
     color: var(--color-light--3);
     font-family: inherit;
     font-size: 1.6rem;
@@ -185,7 +189,7 @@
     &:hover {
       border-color: transparent;
       color: #333;
-      background-color: #aaf735;
+      background-color: var(--color-light-brand--1);
     }
   }
 
@@ -194,6 +198,10 @@
     padding: 0.75rem 1.5rem;
     background-color: var(--color-brand--1);
     color: var(--color-light--3);
+
+    &:hover {
+      background-color: var(--color-light-brand--1);
+    }
   }
 }
 
