@@ -1,12 +1,11 @@
 // Media Query Manager
 @mixin respond($breakpoint) {
-  @media (max-width: $breakpoint) {
+  @media only screen and (max-width: $breakpoint) {
     @content;
   }
 }
 
 // Breakpoints
-$bp-small-laptop: 80em;
 $bp-tablet-landscape: 75em; // 1200px
 $bp-large: 68.75em; // 1100px
 $bp-medium: 60.5em; // 968px

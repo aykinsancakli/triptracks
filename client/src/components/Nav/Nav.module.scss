@@ -7,6 +7,16 @@
   padding: 1.6rem 3.2rem;
   height: 8rem;
 
+  @include respond($bp-medium) {
+    gap: 4rem;
+  }
+
+  img {
+    @include respond($bp-medium) {
+      display: none;
+    }
+  }
+
   .statsPlaces {
     display: flex;
     align-items: center;

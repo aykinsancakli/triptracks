@@ -8,4 +8,8 @@
   @include respond($bp-tablet-landscape) {
     width: 30%;
   }
+
+  @include respond($bp-medium) {
+    width: 38%;
+  }
 }

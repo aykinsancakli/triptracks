@@ -1,6 +1,10 @@
 .formWrapper {
   width: 45%;
   position: relative;
+
+  @include respond($bp-medium) {
+    width: 100%;
+  }
 }
 
 // SEARCHBAR
