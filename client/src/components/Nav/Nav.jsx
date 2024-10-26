@@ -6,6 +6,7 @@ import Stats from "../Stats/Stats";
 import Places from "../Places/Places";
 import PlaceList from "../PlaceList/PlaceList";
 import PlacesFilter from "../PlacesFilter/PlacesFilter";
+import Account from "../Account/Account";
 
 function Nav() {
   return (
@@ -20,6 +21,8 @@ function Nav() {
 
       {/* STATS & PLACES */}
       <div className={styles.statsPlaces}>
+        <Account />
+
         <Stats />
 
         <Places>

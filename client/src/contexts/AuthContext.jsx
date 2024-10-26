@@ -118,6 +118,7 @@ function AuthProvider({ children }) {
 
       if (data.user) {
         dispatch({ type: "login/success", payload: data.user });
+        console.log(data.user);
         return data.user;
       }
     } catch (err) {
@@ -167,6 +168,30 @@ function AuthProvider({ children }) {
     }
   }
 
+  async function deleteAccount() {
+    try {
+      const response = await fetch(`${BASE_URL}/delete-account`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: user.id }),
+        credentials: "include",
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        dispatch({ type: "logout" });
+        console.log("Account deleted:", data.message);
+      } else {
+        console.error("Delete account failed:", data.message);
+      }
+    } catch (err) {
+      console.error("Delete account error:", err);
+    }
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -176,6 +201,7 @@ function AuthProvider({ children }) {
         login,
         signup,
         logout,
+        deleteAccount,
         dispatch,
       }}
     >

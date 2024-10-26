@@ -1,3 +1,4 @@
+const Place = require("../models/Place");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
@@ -127,4 +128,34 @@ exports.checkAuth = async (req, res) => {
 exports.logout = (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
   res.status(200).json({ message: "Logged out" });
+};
+
+// Delete account
+exports.deleteAccount = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    // Delete the user
+    const user = await User.findByIdAndDelete(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Delete all places associated with the user
+    await Place.deleteMany({ userId: userId });
+
+    // Clear the JWT cookie
+    res.clearCookie("jwt");
+
+    // Send success response
+    res.status(200).json({
+      message: "Account and all associated places deleted successfully",
+    });
+  } catch (err) {
+    console.error("Account deletion failed:", err);
+    res
+      .status(500)
+      .json({ message: "Failed to delete account and associated places" });
+  }
 };
