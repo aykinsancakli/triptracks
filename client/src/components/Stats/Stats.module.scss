@@ -212,20 +212,25 @@
     background-color: rgba(0, 0, 0, 0.7);
     animation: blurIn 0.2s ease-in;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     h2 {
       color: var(--color-light--3);
       text-transform: uppercase;
       text-align: center;
       z-index: 99999;
-      width: 100%;
       font-size: 2rem;
       font-weight: 700;
       line-height: 1.95;
       position: absolute;
-      top: 0;
+      top: -1rem;
       left: 50%;
-      transform: translate(-50%, 50%) skewY(-6deg);
+      transform: translate(-50%, 50%) skewY(-4deg);
       z-index: 99999999;
+      width: fit-content;
+      opacity: 0.9;
 
       span {
         -webkit-box-decoration-break: clone;
@@ -245,6 +250,12 @@
       }
     }
 
+    .zoomedPhotoBox {
+      height: 98vh;
+      width: fit-content;
+      position: relative;
+    }
+
     .zoomedPhoto {
       height: 98vh;
       position: relative;
@@ -257,8 +268,8 @@
     .closeBtn {
       position: absolute;
       z-index: 1000000000;
-      top: 2rem;
-      right: 28.5%;
+      top: 1.6rem;
+      right: 2rem;
       background-color: rgba(0, 0, 0, 0.5);
       color: var(--color-brand--1);
       border: none;
@@ -302,11 +313,11 @@
     }
 
     .prevBtn {
-      left: 29%;
+      left: 1.2rem;
     }
 
     .nextBtn {
-      right: 29%;
+      right: 1.2rem;
     }
 
     .prevBtn:hover,

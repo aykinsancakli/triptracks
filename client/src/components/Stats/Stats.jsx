@@ -66,38 +66,43 @@ function Stats() {
       {/* ZOOMED PHOTO SLIDER */}
       {placesWithPhotos.length > 0 && isOpen && (
         <div className={styles.zoomedPhotoContainer}>
-          <img
-            className={styles.zoomedPhoto}
-            src={placesWithPhotos[currentPhotoIndex].photoUrl}
-            alt={`Photo from ${placesWithPhotos[currentPhotoIndex].placeName}`}
-          />
+          <div className={styles.zoomedPhotoBox}>
+            <img
+              className={styles.zoomedPhoto}
+              src={placesWithPhotos[currentPhotoIndex].photoUrl}
+              alt={`Photo from ${placesWithPhotos[currentPhotoIndex].placeName}`}
+            />
 
-          {console.log(placesWithPhotos[currentPhotoIndex])}
+            <h2>
+              <span>
+                {placesWithPhotos[currentPhotoIndex].placeName},{" "}
+                {placesWithPhotos[currentPhotoIndex].country}{" "}
+                <img
+                  src={placesWithPhotos[currentPhotoIndex].flag}
+                  alt="Country flag"
+                />{" "}
+                <br />
+                {formatDate(placesWithPhotos[currentPhotoIndex].date)}
+              </span>
+            </h2>
 
-          <h2>
-            <span>
-              {placesWithPhotos[currentPhotoIndex].placeName},{" "}
-              {placesWithPhotos[currentPhotoIndex].country}{" "}
-              <img
-                src={placesWithPhotos[currentPhotoIndex].flag}
-                alt="Country flag"
-              />{" "}
-              <br />
-              {formatDate(placesWithPhotos[currentPhotoIndex].date)}
-            </span>
-          </h2>
+            {/* Close Button */}
+            <button
+              className={styles.closeBtn}
+              onClick={() => setIsOpen(false)}
+            >
+              &times;
+            </button>
 
-          {/* Close Button */}
-          <button className={styles.closeBtn} onClick={() => setIsOpen(false)}>
-            &times;
-          </button>
-          {/* Previous and Next Buttons */}
-          <button className={styles.prevBtn} onClick={handlePreviousPhoto}>
-            &larr; {/* Left Arrow */}
-          </button>
-          <button className={styles.nextBtn} onClick={handleNextPhoto}>
-            &rarr; {/* Right Arrow */}
-          </button>
+            {/* Previous and Next Buttons */}
+            <button className={styles.prevBtn} onClick={handlePreviousPhoto}>
+              &larr; {/* Left Arrow */}
+            </button>
+
+            <button className={styles.nextBtn} onClick={handleNextPhoto}>
+              &rarr; {/* Right Arrow */}
+            </button>
+          </div>
         </div>
       )}
 
