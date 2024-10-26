@@ -11,7 +11,7 @@
     gap: 4rem;
   }
 
-  img {
+  .logo {
     @include respond($bp-medium) {
       display: none;
     }

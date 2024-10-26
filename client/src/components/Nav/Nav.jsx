@@ -11,7 +11,9 @@ function Nav() {
   return (
     <nav className={styles.nav}>
       {/* LOGO */}
-      <Logo />
+      <div className={styles.logo}>
+        <Logo />
+      </div>
 
       {/* SEARCHBAR */}
       <SearchAutocomplete />

@@ -10,6 +10,10 @@
   border-radius: 0.5rem 0 0 0;
   transition: all 0.2s ease;
 
+  @include respond($bp-tablet) {
+    left: 3px;
+  }
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -30,6 +34,10 @@
     gap: 1rem;
   }
 
+  p {
+    font-size: 1.5rem;
+  }
+
   button {
     padding: 0.5rem 1rem;
     font-size: 1.4rem;
@@ -44,9 +52,13 @@
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: #a3e635;
+      background-color: var(--color-brand--1);
       border-color: #333;
       color: #333;
+    }
+
+    span {
+      margin-right: 0.5rem;
     }
   }
 }

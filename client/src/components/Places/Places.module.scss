@@ -91,6 +91,12 @@
 
     transition: all 0.2s ease;
 
+    @include respond($bp-tablet) {
+      margin-top: 4.73rem;
+      right: 1.5px;
+      width: 37.6rem;
+    }
+
     &:hover {
       opacity: 1;
       pointer-events: all;
