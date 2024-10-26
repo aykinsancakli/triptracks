@@ -3,10 +3,9 @@ import { useAuth } from "../../contexts/AuthContext";
 import styles from "./Account.module.scss";
 import { MdManageAccounts } from "react-icons/md";
 
-function Account() {
+function Account({ isOpen, onToggle }) {
   const { user, deleteAccount } = useAuth();
 
-  const [isAccountOpen, setIsAccountOpen] = useState(false);
   const [isDeleteClicked, setIsDeleteClicked] = useState(false);
 
   async function handleDeleteAccount() {
@@ -16,17 +15,17 @@ function Account() {
   return (
     <div className={styles.account}>
       <button
-        className={`${styles.statsBtn} ${isAccountOpen ? styles.active : ""}`}
-        onClick={() => setIsAccountOpen((isStatsOpen) => !isStatsOpen)}
+        className={`${styles.statsBtn} ${isOpen ? styles.active : ""}`}
+        onClick={onToggle}
       >
         <MdManageAccounts className={styles.icon} />
         <p>Account</p>
       </button>
 
-      {isAccountOpen && (
+      {isOpen && (
         <div className={styles.accountBox}>
           {/* BTN */}
-          <div className={styles.times} onClick={() => setIsAccountOpen(false)}>
+          <div className={styles.times} onClick={onToggle}>
             <span>&times;</span>
           </div>
           <h2>My Account</h2>

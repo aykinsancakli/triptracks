@@ -12,7 +12,7 @@ const formatDate = (date) =>
     weekday: "long",
   }).format(new Date(date));
 
-function Stats() {
+function Stats({ isOpen, onToggle }) {
   const { places } = usePlaces();
 
   // Use location from React Router to check if the current URL contains '/form'
@@ -20,8 +20,7 @@ function Stats() {
   const isFormPage = location.pathname.includes("/form");
 
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isStatsOpen, setIsStatsOpen] = useState(false);
+  const [isPhotoOpen, setIsPhotoOpen] = useState(false);
 
   // Filter out places that have photos
   const placesWithPhotos = places.filter((place) => place.photoUrl);
@@ -56,15 +55,15 @@ function Stats() {
     <div className={`${styles.stats} ${isFormPage ? styles.waiting : ""}`}>
       {/* STATS BUTTON */}
       <button
-        className={`${styles.statsBtn} ${isStatsOpen ? styles.active : ""}`}
-        onClick={() => setIsStatsOpen((isStatsOpen) => !isStatsOpen)}
+        className={`${styles.statsBtn} ${isOpen ? styles.active : ""}`}
+        onClick={onToggle}
       >
         <IoStatsChart size={32} color="#22c55e" />
         <span>Stats</span>
       </button>
 
       {/* ZOOMED PHOTO SLIDER */}
-      {placesWithPhotos.length > 0 && isOpen && (
+      {placesWithPhotos.length > 0 && isPhotoOpen && (
         <div className={styles.zoomedPhotoContainer}>
           <div className={styles.zoomedPhotoBox}>
             <img
@@ -89,7 +88,7 @@ function Stats() {
             {/* Close Button */}
             <button
               className={styles.closeBtn}
-              onClick={() => setIsOpen(false)}
+              onClick={() => setIsPhotoOpen(false)}
             >
               &times;
             </button>
@@ -107,10 +106,10 @@ function Stats() {
       )}
 
       {/* STATS BOX */}
-      {isStatsOpen && (
+      {isOpen && (
         <div className={styles.statsBox}>
-          {/* BTN */}
-          <div className={styles.times} onClick={() => setIsStatsOpen(false)}>
+          {/* Close Button */}
+          <div className={styles.times} onClick={onToggle}>
             <span>&times;</span>
           </div>
 
@@ -158,7 +157,7 @@ function Stats() {
                         className={styles.imgWrap}
                         onClick={() => {
                           setCurrentPhotoIndex(placesWithPhotos.indexOf(place));
-                          setIsOpen((isOpen) => !isOpen);
+                          setIsPhotoOpen((isPhotoOpen) => !isPhotoOpen);
                         }}
                       >
                         <span>enlarge</span>

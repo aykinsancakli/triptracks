@@ -7,8 +7,14 @@ import Places from "../Places/Places";
 import PlaceList from "../PlaceList/PlaceList";
 import PlacesFilter from "../PlacesFilter/PlacesFilter";
 import Account from "../Account/Account";
+import { useState } from "react";
 
 function Nav() {
+  const [openBox, setOpenBox] = useState(null);
+
+  const toggleBox = (box) => {
+    setOpenBox((prevBox) => (prevBox === box ? null : box));
+  };
   return (
     <nav className={styles.nav}>
       {/* LOGO */}
@@ -21,9 +27,15 @@ function Nav() {
 
       {/* STATS & PLACES */}
       <div className={styles.statsPlaces}>
-        <Account />
+        <Account
+          isOpen={openBox === "account"}
+          onToggle={() => toggleBox("account")}
+        />
 
-        <Stats />
+        <Stats
+          isOpen={openBox === "stats"}
+          onToggle={() => toggleBox("stats")}
+        />
 
         <Places>
           <PlaceList />
