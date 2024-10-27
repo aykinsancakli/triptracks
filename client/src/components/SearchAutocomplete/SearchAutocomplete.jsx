@@ -67,13 +67,14 @@ function SearchAutocomplete() {
               const className = suggestion.active
                 ? "suggestion-item--active"
                 : "suggestion-item";
-              // inline style for demonstration purpose
+
               const style = suggestion.active
                 ? { backgroundColor: "#1d1b1b", cursor: "pointer" }
                 : { backgroundColor: "#373535ea", cursor: "pointer" };
+
               return (
                 <div
-                  key={suggestion.description}
+                  key={suggestion.description} // Directly specify the key here
                   {...getSuggestionItemProps(suggestion, {
                     className,
                     style,

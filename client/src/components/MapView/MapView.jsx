@@ -197,9 +197,9 @@ function MapView() {
         onLoad={onLoad}
         onClick={isFormPage ? null : handleMapClick}
       >
-        {markers.map((marker) => (
+        {markers.map((marker, index) => (
           <Marker
-            key={marker.id}
+            key={marker.id || index}
             position={marker.position}
             icon={{
               url: isDarkMode ? markerGreen : markerRed,

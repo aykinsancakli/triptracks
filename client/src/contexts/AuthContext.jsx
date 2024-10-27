@@ -118,7 +118,7 @@ function AuthProvider({ children }) {
 
       if (data.user) {
         dispatch({ type: "login/success", payload: data.user });
-        console.log(data.user);
+        // console.log(data.user);
         return data.user;
       }
     } catch (err) {

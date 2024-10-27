@@ -10,11 +10,13 @@ import User from "../../components/User/User";
 import Logo from "../../components/Logo/Logo";
 import { Link } from "react-router-dom";
 
+const libraries = ["places"];
+
 function AppLayout() {
   // Load maps script => (need after this point since we are in the app)
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-    libraries: ["places"], // Include places library instead of loading seperately
+    libraries, // Include places library instead of loading seperately
   });
 
   return (
