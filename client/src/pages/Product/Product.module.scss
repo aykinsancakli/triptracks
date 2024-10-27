@@ -21,8 +21,8 @@
     /* Preload desktop images */
     background-image: url("../../assets/bg-01.webp"),
       url("../../assets/bg-02.webp"), url("../../assets/bg-03.webp"),
-      url("../../assets/bg-04.webp"), url(../../assets/img-1.webp),
-      url(../../assets/img-2.webp);
+      url("../../assets/bg-04.webp"), url("../../assets/img-1.webp"),
+      url("../../assets/img-2.webp");
 
     /* Preload mobile images */
     @media (max-width: $bp-tablet) {
