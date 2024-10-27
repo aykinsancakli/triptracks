@@ -20,7 +20,7 @@ app.use(cookieParser());
 const corsOptions = {
   origin:
     process.env.NODE_ENV === "production"
-      ? "https://your-production-url.com"
+      ? process.env.PRODUCTION_URL
       : "http://localhost:5173",
   credentials: true,
 };
