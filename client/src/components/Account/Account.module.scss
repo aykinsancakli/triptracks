@@ -123,3 +123,10 @@
     filter: blur(0);
   }
 }
+
+// DISABLED STATES
+.accountDisabled {
+  cursor: not-allowed !important;
+  opacity: 0.5 !important;
+  pointer-events: none;
+}

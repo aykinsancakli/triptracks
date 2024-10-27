@@ -145,7 +145,6 @@ function AuthProvider({ children }) {
       }
 
       if (data.user) {
-        console.log(data.user);
         dispatch({ type: "signup/success", payload: data.user });
         return data.user;
       }
@@ -183,7 +182,7 @@ function AuthProvider({ children }) {
 
       if (response.ok) {
         dispatch({ type: "logout" });
-        console.log("Account deleted:", data.message);
+        // console.log("Account deleted:", data.message);
       } else {
         console.error("Delete account failed:", data.message);
       }

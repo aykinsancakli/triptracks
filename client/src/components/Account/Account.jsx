@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import styles from "./Account.module.scss";
 import { MdManageAccounts } from "react-icons/md";
+import { useLocation } from "react-router-dom";
 
 function Account({ isOpen, onToggle }) {
   const { user, deleteAccount } = useAuth();
@@ -12,10 +13,20 @@ function Account({ isOpen, onToggle }) {
     await deleteAccount();
   }
 
+  // Use location from React Router to check if the current URL contains '/form'
+  const location = useLocation();
+  const isFormPage = location.pathname.includes("/form");
+
   return (
-    <div className={styles.account}>
+    <div
+      className={`${styles.account} ${
+        isFormPage ? `${styles.accountDisabled}` : ""
+      }`}
+    >
       <button
-        className={`${styles.statsBtn} ${isOpen ? styles.active : ""}`}
+        className={`${styles.statsBtn} ${isOpen ? styles.active : ""} ${
+          isFormPage ? styles.accountDisabled : ""
+        }`}
         onClick={onToggle}
       >
         <MdManageAccounts className={styles.icon} />

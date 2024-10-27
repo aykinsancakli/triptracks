@@ -42,7 +42,7 @@ function Weather() {
     !(isFormPage || isPlacePage) && ( // Render only if it's neither form nor place page
       <div className={styles.weather}>
         {isLoading ? (
-          <Spinner />
+          <Spinner message="Loading weather and time..." />
         ) : error ? (
           <div className={styles.error}>
             <Message message={error} />

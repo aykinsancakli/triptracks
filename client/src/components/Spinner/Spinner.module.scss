@@ -6,7 +6,25 @@
   justify-content: center;
   flex-direction: column;
   gap: 1.6rem;
+  background-color: var(--color-dark--1);
+  border-radius: 0.9rem;
   animation: blurIn 0.2s ease-in-out;
+
+  p {
+    animation: breathe 1s infinite alternate-reverse;
+    font-size: 1.5rem;
+    color: var(--color-light--1);
+  }
+}
+
+@keyframes breathe {
+  from {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes blurIn {

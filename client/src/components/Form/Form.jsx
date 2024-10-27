@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { usePlaces } from "../../contexts/PlacesContext";
 import StarRating from "../StarRating/StarRating";
 import Spinner from "../Spinner/Spinner";
+import Logo from "../Logo/Logo";
 
 // Star rating messages
 const messages = ["Terrible", "Bad", "Not Bad", "Good", "Amazing"];
@@ -67,7 +68,11 @@ function Form() {
       onSubmit={handleSubmit}
     >
       {isLoading ? (
-        <Spinner />
+        <>
+          <div className={styles.placeSaveContainer}>
+            <Spinner message="Saving your adventure..." />
+          </div>
+        </>
       ) : (
         <div className={styles.formWrapper}>
           {isOpen && (

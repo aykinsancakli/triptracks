@@ -79,7 +79,7 @@ function Country() {
     <div className={styles.country}>
       <div className={styles.countryWrapper}>
         {isLoading ? (
-          <Spinner />
+          <Spinner message="Loading country..." />
         ) : error ? (
           <div className={styles.error}>
             <Message message={error} />
