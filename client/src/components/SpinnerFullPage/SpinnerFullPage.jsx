@@ -7,7 +7,7 @@ function SpinnerFullPage() {
     <div className={styles.spinnerFullPage}>
       <Logo />
       <div>
-        <Spinner />
+        <Spinner background="transparent" />
       </div>
     </div>
   );

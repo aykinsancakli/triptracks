@@ -74,7 +74,8 @@ function App() {
                   }
                 />
               </Route>
-              <Route path="*" element={<PageNotFound />} />
+              {/* <Route path="*" element={<PageNotFound />} /> */}
+              <Route path="*" element={<SpinnerFullPage />} />
             </Routes>
           </Suspense>
         </BrowserRouter>
