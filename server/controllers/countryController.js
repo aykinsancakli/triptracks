@@ -27,7 +27,7 @@ exports.getCountryByCoordinates = async (req, res) => {
 
     // Fetch country data by country name
     const countryDataRes = await fetch(
-      `${process.env.PRODUCTION_URL}/country/${countryName}`
+      `${process.env.PRODUCTION_URL}/api/country/${countryName}`
     );
 
     if (!countryDataRes.ok) {
