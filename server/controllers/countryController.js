@@ -4,6 +4,8 @@ const fetch = require("node-fetch");
 exports.getCountryByCoordinates = async (req, res) => {
   const { lat, lng } = req.params;
 
+  console.log(lat, lng);
+
   try {
     const bdcRes = await fetch(
       `https://api-bdc.net/data/reverse-geocode?latitude=${lat}&longitude=${lng}&localityLanguage=en&key=${process.env.BIG_DATA_CLOUD_API_KEY}`
@@ -25,7 +27,7 @@ exports.getCountryByCoordinates = async (req, res) => {
 
     // Fetch country data by country name
     const countryDataRes = await fetch(
-      `${process.env.BASE_URL}/country/${countryName}`
+      `${process.env.PRODUCTION_URL}/country/${countryName}`
     );
 
     if (!countryDataRes.ok) {
