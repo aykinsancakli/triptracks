@@ -100,7 +100,7 @@ Make sure you have the following:
 
    ```bash
    git clone https://github.com/aykinsancakli/triptracks.git
-   cd TripTracks
+   cd triptracks
    ```
 
 2. **Install dependencies**:
