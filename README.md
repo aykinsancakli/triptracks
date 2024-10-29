@@ -2,7 +2,7 @@
 
 ![TripTracks Cover Image](./assets/cover.jpg)
 
-**A location-tracking web application to record and share your favorite travel spots and memories.**
+**A location-tracking web application that lets users save, view, and manage their favorite travel locations worldwide.**
 
 ---
 
